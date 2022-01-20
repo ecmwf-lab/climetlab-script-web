@@ -36,7 +36,7 @@ setuptools.setup(
     include_package_data=True,
     install_requires=["climetlab", "web-py"],
     zip_safe=True,
-    entry_points={"climetlab.scripts": ["web = climetlab_script_web:WebCmd"]},
+    entry_points={"climetlab.scripts": ["web = climetlab_script_web.web_cmd:WebCmd"]},
     keywords="meteorology",
     classifiers=[
         "Development Status :: 3 - Alpha",
