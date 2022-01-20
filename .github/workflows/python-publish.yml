@@ -68,7 +68,7 @@ jobs:
       run: pip install dist/climetlab-script-web-*.tar.gz
 
     - name: Run tests
-      run: pytest
+      run: echo 'setup tests. pytest or other'
 
     - name: Check version
       if: ${{ github.event_name == 'release' }}
