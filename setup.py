@@ -34,7 +34,7 @@ setuptools.setup(
     url="https://github.com/ecmwf/climetlab-script-web",
     packages=setuptools.find_packages(),
     include_package_data=True,
-    install_requires=["climetlab"],
+    install_requires=["climetlab", "web-py"],
     zip_safe=True,
     entry_points={"climetlab.scripts": ["web = climetlab_script_web:WebCmd"]},
     keywords="meteorology",
