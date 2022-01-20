@@ -1,0 +1,4 @@
+include climetlab_script_web/static/*
+include climetlab_script_web/static/*/*
+include climetlab_script_web/static/*/*/*
+include climetlab_script_web/static/*/*/*/*

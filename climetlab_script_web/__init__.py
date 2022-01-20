@@ -8,8 +8,8 @@
 #
 
 import os
+
 import web
-from climetlab.core.caching import dump_cache_database
 from climetlab.scripts.tools import parse_args
 
 from .api import cache, cacheentry
@@ -17,13 +17,16 @@ from .api import cache, cacheentry
 
 class frontend:
     def GET(self, name):
-     raise web.seeother(f'/static/{name}')
+        raise web.seeother(f"/static/{name}")
 
 
 urls = (
-    "/api/cache", cache,
-    "/api/cacheentry", cacheentry,
-    "/(.*)", frontend,
+    "/api/cache",
+    cache,
+    "/api/cacheentry",
+    cacheentry,
+    "/(.*)",
+    frontend,
 )
 
 
@@ -35,7 +38,7 @@ class WebCmd:
         ),
     )
     def do_web(self, args):
-        """ Web server to manage CliMetLab."""
+        """Web server to manage CliMetLab."""
         print("Starting CliMetLab web server")
 
         cwd = os.getcwd()
