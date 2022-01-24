@@ -1,6 +1,5 @@
 This is a draft.
 
-# How to develop
 
 ## Get source code
 ```
