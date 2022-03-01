@@ -64,6 +64,9 @@ jobs:
     - name: list package content
       run: tar tvf dist/climetlab-script-web-*.tar.gz
                                           
+    - name: Install climetlab
+      run: pip install climetlab
+
     - name: Install python package
       run: pip install dist/climetlab-script-web-*.tar.gz
 
