@@ -15,23 +15,21 @@ pip install -e .
 
 ## Build the javascript (See the github actions)
 ```
-cd reactjs
+cd frontend
 npm install
 npm test
 npm run build
-mv build/static/* build/.
-rmdir build/static
-rm -rf ../climetlab_script_web/static
-mv build ../climetlab_script_web/static
+mv build ../climetlab_script_web/build
 ```
 
 ## Run server
 ```
 cd ..
-climetlab web
+flask run  # need to update setuptool entrypoint: climetlab web
 ```
 
-Now browse to http://127.0.0.1:51979 (front-end) and http://127.0.0.1:51979/api/cache (API).
+<!-- Now browse to http://127.0.0.1:51979 (front-end) and http://127.0.0.1:51979/api/cache (API). -->
+Now browse to http://127.0.0.1:5000 (front-end) and http://127.0.0.1:5000/api (API).
 
 # Licence
 See LICENSE file.
