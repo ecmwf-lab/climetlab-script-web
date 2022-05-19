@@ -1,6 +1,5 @@
 from flask import Flask
 from flask.helpers import send_from_directory
-
 from waitress import serve
 
 app = Flask(__name__, static_folder="build", static_url_path="/")
