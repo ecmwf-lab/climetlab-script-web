@@ -40,9 +40,11 @@ setuptools.setup(
     url="https://github.com/ecmwf/climetlab-script-web",
     packages=setuptools.find_packages(),
     include_package_data=True,
-    install_requires=["climetlab>=0.10.0", "Flask"],
+    install_requires=["climetlab>=0.10.0", "Flask", "waitress"],
     zip_safe=True,
-    entry_points={"climetlab.scripts": ["web = climetlab_script_web.web_cmd:WebCmd"]},
+    entry_points={
+        "console_scripts": ["climetlab_web = climetlab_script_web.app:run_server"]
+    },
     keywords="meteorology",
     classifiers=[
         "Development Status :: 3 - Alpha",
