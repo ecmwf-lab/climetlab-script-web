@@ -34,7 +34,7 @@ npm run build
 mv build ../climetlab_script_web/build
 ```
 
-### Run Server
+## Usage
 
 Run the following command from project's root and navigate to `http://127.0.0.1:8080` in your browser.
 
