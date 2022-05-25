@@ -1,0 +1,31 @@
+# See https://pre-commit.com for more information
+# See https://pre-commit.com/hooks.html for more hooks
+repos:
+  - repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: v3.2.0
+    hooks:
+      - id: trailing-whitespace
+      - id: end-of-file-fixer
+      - id: check-yaml
+
+  - repo: local
+    hooks:
+      - id: lint
+        name: lint
+        entry: make
+        args: ["lint"]
+        language: system
+        pass_filenames: false
+      - id: format
+        name: format
+        entry: make
+        args: ["format"]
+        language: system
+        pass_filenames: false
+      - id: test
+        name: test
+        entry: make
+        args: ["test"]
+        language: system
+        pass_filenames: false
+

@@ -12,7 +12,7 @@ lint: ## Run linters: flake8 and eslint
 
 format: ## Run formatter: black and prettier
 	(cd frontend && npm run format)
-	(cd climetlab_script_web && black .)
+	(cd climetlab_script_web && isort . && black .)
 
 test: ## Run tests: pytest and npm
 	(cd frontend && npm test)
