@@ -68,7 +68,7 @@ flask run
 - Changes in the frontend will automatically reflect here.
 - Changes in the backend will require a restart of flask server.
 - Use Makefile commands for improved development experience (`make help`).
-- A pre-commit hook performs linting, formatting, testing, and test coverage.
+- A pre-commit hook performs linting, formatting, and testing for both ReactJs and Python code.
 
 ### Prepare For Deployment
 
