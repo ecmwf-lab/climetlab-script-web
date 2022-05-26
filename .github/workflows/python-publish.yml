@@ -67,7 +67,6 @@ jobs:
       run: pip install dist/climetlab-script-web-*.tar.gz
 
     - name: Run tests
-      working-directory: ./climetlab_script_web
       run: |
         pip install pytest
         pytest -v
