@@ -25,7 +25,6 @@ jobs:
       - run: flake8 .
 
   deploy:
-
     name: Test and upload to Pypi
     needs: quality
     runs-on: ubuntu-latest
@@ -33,21 +32,18 @@ jobs:
     steps:
     - uses: actions/checkout@v2
 
-
     - uses: actions/setup-node@v2
       with:
           cache: 'npm'
           cache-dependency-path: 'package-lock.json'
 
-    - name: Build javascript reactjs
-      working-directory: ./reactjs
+    - name: Build javascript frontend
+      working-directory: ./frontend
       run: |
         npm install
         npm test
         npm run build
-        mv build/static/* build/.
-        rmdir build/static
-        mv build ../climetlab_script_web/static
+        mv build ../climetlab_script_web/build
 
     - name: Set up Python
       uses: actions/setup-python@v2
@@ -63,7 +59,7 @@ jobs:
 
     - name: list package content
       run: tar tvf dist/climetlab-script-web-*.tar.gz
-                                          
+
     - name: Install climetlab
       run: pip install climetlab
 
@@ -71,7 +67,9 @@ jobs:
       run: pip install dist/climetlab-script-web-*.tar.gz
 
     - name: Run tests
-      run: echo 'setup tests. pytest or other'
+      run: |
+        pip install pytest
+        pytest -v
 
     - name: Check version
       if: ${{ github.event_name == 'release' }}
