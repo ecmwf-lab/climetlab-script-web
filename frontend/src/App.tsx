@@ -7,15 +7,15 @@ import Navbar from './components/Navbar'
 import PageCache from './components/PageCache'
 
 const App = () => {
-    const [data, setData] = useState('')
-
-    useEffect(() => {
-        fetch('/api')
-            .then((res) => res.json())
-            .then((data) => {
-                setData(data.data)
-            })
-    }, [])
+    // const [data, setData] = useState('')
+    //
+    // useEffect(() => {
+    //     fetch('/api')
+    //         .then((res) => res.json())
+    //         .then((data) => {
+    //             setData(data.data)
+    //         })
+    // }, [])
 
     return (
         <div tw="flex flex-col h-screen w-full">
