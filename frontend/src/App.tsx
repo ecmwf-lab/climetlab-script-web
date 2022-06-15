@@ -4,7 +4,7 @@ import { useState, useEffect } from 'react'
 
 // import components
 import Navbar from './components/Navbar'
-import Main from './components/Main'
+import PageCache from './components/PageCache'
 
 const App = () => {
     const [data, setData] = useState('')
@@ -20,7 +20,7 @@ const App = () => {
     return (
         <div tw="flex flex-col h-screen w-full">
             <Navbar />
-            <Main />
+            <PageCache />
         </div>
     )
 }
