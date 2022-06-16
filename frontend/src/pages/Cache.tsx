@@ -1,4 +1,4 @@
-import tw from 'twin.macro'
+import 'twin.macro'
 import 'styled-components/macro'
 
 import {
@@ -11,6 +11,7 @@ import {
 
 import { TextInput, SelectInput } from './../components/Inputs'
 import { HeaderTitle } from './../components/Text'
+import { SubmitButton } from './../components/Button'
 
 const Cache = () => {
     return (
@@ -43,9 +44,7 @@ const Cache = () => {
                         </InputColumn>
                     </div>
                     <div tw="self-center md:(self-start text-end)">
-                        <button tw="px-2 py-1 rounded-lg text-base text-gray-100 bg-blue-700 md:text-lg">
-                            filter
-                        </button>
+                        <SubmitButton>filter</SubmitButton>
                     </div>
                 </ContainerHeader>
                 <ContainerBody>body</ContainerBody>
