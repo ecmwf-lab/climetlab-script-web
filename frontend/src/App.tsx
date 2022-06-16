@@ -1,10 +1,10 @@
 import 'twin.macro'
 import 'styled-components/macro'
-import { useState, useEffect } from 'react'
+// import { useState, useEffect } from 'react'
 
 // import components
 import Navbar from './components/Navbar'
-import PageCache from './components/PageCache'
+import Cache from './pages/Cache'
 
 const App = () => {
     // const [data, setData] = useState('')
@@ -20,7 +20,7 @@ const App = () => {
     return (
         <div tw="flex flex-col h-screen w-full">
             <Navbar />
-            <PageCache />
+            <Cache />
         </div>
     )
 }
