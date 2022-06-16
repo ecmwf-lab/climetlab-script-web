@@ -7,12 +7,44 @@ const ContainerHeader = tw.div`flex flex-col space-y-4 p-4 md:(flex-row justify-
 const ContainerBody = tw.div`flex flex-col space-y-4 p-4 md:(p-6) lg:p-8 bg-gray-100`
 const InputColumn = tw.div`flex flex-row justify-between w-full md:(flex-col space-y-4) lg:(space-y-8)`
 
-const TextInput = () => {
+const InputStyle = tw.label`flex flex-col w-2/5 text-base sm:text-lg md:(w-full)`
+
+interface InputInterface {
+    inputName: string
+    inputLabel: string
+}
+
+const TextInput = ({ inputName, inputLabel }: InputInterface) => {
     return (
-        <label tw="flex flex-col w-2/5 text-base sm:text-lg md:(w-full)">
-            <span> Filename </span>
-            <input tw="rounded-lg" type="text" name="filename" />
-        </label>
+        <InputStyle>
+            <span> {inputLabel} </span>
+            <input tw="rounded-lg px-2 py-1" type="text" name={inputName} />
+        </InputStyle>
+    )
+}
+
+interface SelectInputInterface extends InputInterface {
+    inputOptions: {
+        name: string
+        label: string
+    }[]
+}
+const SelectInput = ({
+    inputName,
+    inputLabel,
+    inputOptions,
+}: SelectInputInterface) => {
+    return (
+        <InputStyle>
+            <span> {inputLabel} </span>
+            <select tw="rounded-lg bg-white px-3 py-2" name={inputName}>
+                {inputOptions.map((obj) => (
+                    <option key={obj.name} value={obj.name}>
+                        {obj.label}
+                    </option>
+                ))}
+            </select>
+        </InputStyle>
     )
 }
 
@@ -26,16 +58,26 @@ const PageCache = () => {
                     <HeaderTitle>Cache</HeaderTitle>
                     <div tw="flex flex-col w-full space-y-4 md:(flex-row flex-shrink space-y-0 space-x-12)">
                         <InputColumn>
-                            <TextInput />
-                            <TextInput />
+                            <TextInput
+                                inputName="filename"
+                                inputLabel="Filename"
+                            />
+                            <TextInput inputName="owner" inputLabel="Owner" />
                         </InputColumn>
                         <InputColumn>
-                            <TextInput />
-                            <TextInput />
+                            <SelectInput
+                                inputName="dataType"
+                                inputLabel="Data Type"
+                                inputOptions={[
+                                    { name: 'grib', label: 'GRIB' },
+                                    { name: 'netcdf', label: 'NetCDF' },
+                                ]}
+                            />
+                            <TextInput inputName="owner" inputLabel="Owner" />
                         </InputColumn>
                         <InputColumn>
-                            <TextInput />
-                            <TextInput />
+                            <TextInput inputName="owner" inputLabel="Owner" />
+                            <TextInput inputName="owner" inputLabel="Owner" />
                         </InputColumn>
                     </div>
                     <div tw="self-center md:(self-start text-end)">
