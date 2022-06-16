@@ -1,15 +1,18 @@
 import tw from 'twin.macro'
 import 'styled-components/macro'
 
-// style
+//========== style ===============
 const InputStyle = tw.label`flex flex-col w-2/5 text-base sm:text-lg md:(w-full)`
 
-// html input
+//========== html input ===============
+
+// Base input interface
 interface InputInterface {
     inputName: string
     inputLabel: string
 }
 
+// text input
 export const TextInput = ({ inputName, inputLabel }: InputInterface) => {
     return (
         <InputStyle>
@@ -19,6 +22,7 @@ export const TextInput = ({ inputName, inputLabel }: InputInterface) => {
     )
 }
 
+// select input
 interface SelectInputInterface extends InputInterface {
     inputOptions: {
         name: string
