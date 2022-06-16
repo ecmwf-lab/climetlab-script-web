@@ -1,15 +1,16 @@
 import tw from 'twin.macro'
 import 'styled-components/macro'
 
+import {
+    Layout,
+    Container,
+    ContainerHeader,
+    ContainerBody,
+    InputColumn,
+} from './../components/Layout'
+
 import { TextInput, SelectInput } from './../components/Inputs'
-
-const Layout = tw.section`flex flex-col w-full h-full p-4 bg-blue-100 md:(p-6) lg:(p-8)`
-const Container = tw.div`flex flex-col w-full h-full bg-gray-100 rounded-lg`
-const ContainerHeader = tw.div`flex flex-col space-y-4 p-4 md:(flex-row justify-between items-center overflow-x-auto space-y-0 space-x-12 p-6) lg:p-8 bg-gray-200`
-const ContainerBody = tw.div`flex flex-col space-y-4 p-4 md:(p-6) lg:p-8 bg-gray-100`
-const InputColumn = tw.div`flex flex-row justify-between w-full md:(flex-col space-y-4) lg:(space-y-8)`
-
-const HeaderTitle = tw.h1`h-full font-semibold text-xl sm:text-2xl md:(w-1/5 pr-8 py-12 text-3xl border-r border-blue-700) lg:(text-4xl) xl:(text-5xl)`
+import { HeaderTitle } from './../components/Text'
 
 const Cache = () => {
     return (
