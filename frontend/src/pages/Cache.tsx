@@ -9,7 +9,11 @@ import {
     InputColumn,
 } from './../components/Layout'
 
-import { TextInput, SelectInput } from './../components/Inputs'
+import {
+    TextInput,
+    SelectInput,
+    MultiRangeSlider,
+} from './../components/Inputs'
 import { HeaderTitle } from './../components/Text'
 import { SubmitButton } from './../components/Button'
 
@@ -19,7 +23,7 @@ const Cache = () => {
             <Container>
                 <ContainerHeader>
                     <HeaderTitle>Cache</HeaderTitle>
-                    <div tw="flex flex-col w-full space-y-4 md:(flex-row flex-shrink space-y-0 space-x-12)">
+                    <div tw="grid grid-cols-1 gap-4 md:(grid-cols-3 gap-12) lg:gap-16">
                         <InputColumn>
                             <TextInput
                                 inputName="filename"
@@ -29,8 +33,8 @@ const Cache = () => {
                         </InputColumn>
                         <InputColumn>
                             <SelectInput
-                                inputName="dataType"
-                                inputLabel="Data Type"
+                                inputName="fileType"
+                                inputLabel="File Type"
                                 inputOptions={[
                                     { name: 'grib', label: 'GRIB' },
                                     { name: 'netcdf', label: 'NetCDF' },
@@ -39,11 +43,18 @@ const Cache = () => {
                             <TextInput inputName="owner" inputLabel="Owner" />
                         </InputColumn>
                         <InputColumn>
-                            <TextInput inputName="owner" inputLabel="Owner" />
-                            <TextInput inputName="owner" inputLabel="Owner" />
+                            <MultiRangeSlider
+                                inputName="fileSize"
+                                inputLabel="File Size"
+                                displayMin={0}
+                                displayMax={1000}
+                                initMinVal={100}
+                                initMaxVal={800}
+                                step={100}
+                            />
                         </InputColumn>
                     </div>
-                    <div tw="self-center md:(self-start text-end)">
+                    <div tw="self-center md:(self-start text-end pl-16)">
                         <SubmitButton>filter</SubmitButton>
                     </div>
                 </ContainerHeader>
