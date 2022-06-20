@@ -81,26 +81,31 @@ export const MultiRangeSlider = ({
     const sliderRef = useRef<HTMLDivElement | null>(null)
 
     const handleSliderMin = (e: React.ChangeEvent<HTMLInputElement>) => {
-        if (
-            maxVal <= displayMax &&
-            minVal >= displayMin &&
-            maxVal > minVal &&
-            maxVal - minVal > step
-        ) {
-            setMinVal(parseInt(e.target.value))
+        if (maxVal - minVal >= step && maxVal <= displayMax) {
+            if (parseInt(e.target.value) > maxVal) {
+            } else {
+                setMinVal(parseInt(e.target.value))
+            }
+        } else {
+            if (parseInt(e.target.value) < minVal) {
+                setMinVal(parseInt(e.target.value))
+            }
         }
     }
 
     const handleSliderMax = (e: React.ChangeEvent<HTMLInputElement>) => {
-        if (
-            maxVal <= displayMax &&
-            minVal >= displayMin &&
-            maxVal > minVal &&
-            maxVal - minVal > step
-        ) {
-            setMaxVal(parseInt(e.target.value))
+        if (maxVal - minVal >= step && maxVal <= displayMax) {
+            if (parseInt(e.target.value) < minVal) {
+            } else {
+                setMaxVal(parseInt(e.target.value))
+            }
+        } else {
+            if (parseInt(e.target.value) > maxVal) {
+                setMaxVal(parseInt(e.target.value))
+            }
         }
     }
+
     useEffect(() => {
         if (sliderRef.current) {
             sliderRef.current.style.left = (minVal / displayMax) * step + '%'
@@ -132,10 +137,10 @@ export const MultiRangeSlider = ({
                         placeholder="max"
                     />
                 </div>
-                <div tw="relative bg-red-500 rounded-lg"></div>
+                {/* <div tw="relative bg-red-500 rounded-lg"></div> */}
 
                 <div tw="flex flex-col relative w-full">
-                    <div tw="relative top-2 h-1 rounded-lg bg-gray-300">
+                    <div tw="relative top-2 h-1 rounded-lg bg-gray-300 md:top-1">
                         <div
                             tw="absolute h-1 rounded-lg bg-blue-700"
                             ref={sliderRef}
@@ -143,7 +148,7 @@ export const MultiRangeSlider = ({
                     </div>
 
                     <input
-                        tw="absolute top-2 h-1 w-full bg-transparent appearance-none"
+                        tw="absolute top-2 h-1 w-full bg-transparent appearance-none md:top-1"
                         type="range"
                         onChange={handleSliderMin}
                         value={minVal}
@@ -152,7 +157,7 @@ export const MultiRangeSlider = ({
                         max={displayMax}
                     />
                     <input
-                        tw="absolute top-2 h-1 w-full bg-transparent appearance-none"
+                        tw="absolute top-2 h-1 w-full bg-transparent appearance-none md:top-1"
                         type="range"
                         onChange={handleSliderMax}
                         value={maxVal}
