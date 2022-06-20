@@ -137,7 +137,6 @@ export const MultiRangeSlider = ({
                         placeholder="max"
                     />
                 </div>
-                {/* <div tw="relative bg-red-500 rounded-lg"></div> */}
 
                 <div tw="flex flex-col relative w-full">
                     <div tw="relative top-2 h-1 rounded-lg bg-gray-300 md:top-1">
