@@ -14,6 +14,8 @@ import {
     SelectInput,
     MultiRangeSlider,
 } from './../components/Inputs'
+
+import { CacheTable } from './../components/Tables'
 import { HeaderTitle } from './../components/Text'
 import { SubmitButton } from './../components/Button'
 
@@ -58,7 +60,9 @@ const Cache = () => {
                         <SubmitButton>filter</SubmitButton>
                     </div>
                 </ContainerHeader>
-                <ContainerBody>body</ContainerBody>
+                <ContainerBody>
+                    <CacheTable />
+                </ContainerBody>
             </Container>
         </Layout>
     )

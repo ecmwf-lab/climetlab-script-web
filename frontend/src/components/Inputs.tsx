@@ -3,7 +3,7 @@ import 'styled-components/macro'
 import { useEffect, useRef, useState } from 'react'
 
 //========== style ===============
-const InputStyle = tw.label`flex flex-col w-2/5 text-base space-y-2 sm:(text-lg space-y-4) md:(w-full space-y-6)`
+const InputStyle = tw.label`flex flex-col w-2/5 text-base space-y-2 sm:(space-y-4) md:(w-full space-y-6 text-lg)`
 
 //========== html input ===============
 
@@ -11,6 +11,17 @@ const InputStyle = tw.label`flex flex-col w-2/5 text-base space-y-2 sm:(text-lg 
 interface InputInterface {
     inputName: string
     inputLabel: string
+}
+
+// check box
+export const CheckboxInput = ({ inputName }: { inputName: string }) => {
+    return (
+        <input
+            tw="block box-border border-gray-100 rounded-lg md:(h-4 w-4) lg:(h-6 w-6)"
+            type="checkbox"
+            name={inputName}
+        />
+    )
 }
 
 // text input
