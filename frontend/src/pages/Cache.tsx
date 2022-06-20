@@ -17,7 +17,7 @@ import {
 
 import { CacheTable } from './../components/Tables'
 import { HeaderTitle } from './../components/Text'
-import { SubmitButton } from './../components/Button'
+import { SubmitButton } from './../components/Buttons'
 
 const Cache = () => {
     return (
@@ -57,7 +57,7 @@ const Cache = () => {
                         </InputColumn>
                     </div>
                     <div tw="self-center md:(self-start text-end pl-16)">
-                        <SubmitButton>filter</SubmitButton>
+                        <SubmitButton>apply</SubmitButton>
                     </div>
                 </ContainerHeader>
                 <ContainerBody>
