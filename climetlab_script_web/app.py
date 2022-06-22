@@ -1,3 +1,6 @@
+import json
+import subprocess
+
 from flask import Flask
 from flask.helpers import send_from_directory
 from waitress import serve
@@ -13,6 +16,19 @@ def index():
 @app.route("/api")
 def hello_world():
     return {"data": "hello esowc!"}
+
+
+@app.route("/cache")
+def cache_db():
+    data = subprocess.run(
+        ["climetlab", "cache", "--all", "--json"],
+        capture_output=True,
+        text=True,
+    ).stdout
+
+    data = "".join(data.split())
+    data = json.loads(data)
+    return {"data": data}
 
 
 def run_server():
