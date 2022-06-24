@@ -37,7 +37,7 @@ setuptools.setup(
     author="European Centre for Medium-Range Weather Forecasts (ECMWF)",
     author_email="software.support@ecmwf.int",
     license="Apache License Version 2.0",
-    url="https://github.com/ecmwf/climetlab-script-web",
+    url="https://github.com/ecmwf-lab/climetlab-script-web",
     packages=setuptools.find_packages(),
     include_package_data=True,
     install_requires=["climetlab>=0.10.0", "Flask", "waitress"],
