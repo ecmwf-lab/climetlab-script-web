@@ -1,5 +1,6 @@
 import 'twin.macro'
 import 'styled-components/macro'
+import { useState, useEffect } from 'react'
 
 import {
     Layout,
@@ -20,6 +21,17 @@ import { HeaderTitle } from './../components/Text'
 import { SubmitButton } from './../components/Buttons'
 
 const Cache = () => {
+    const [data, setData] = useState<[] | null>(null)
+
+    useEffect(() => {
+        fetch('/api/v1/cache/all')
+            .then((res) => res.json())
+            .then((res) => {
+                setData(res.data)
+            })
+    }, [])
+
+    data && data.map((obj) => console.log(obj['creation_date']))
     return (
         <Layout>
             <Container>
@@ -60,6 +72,7 @@ const Cache = () => {
                         <SubmitButton>apply</SubmitButton>
                     </div>
                 </ContainerHeader>
+                {/* Container body with table */}
                 <ContainerBody>
                     <CacheTable />
                 </ContainerBody>

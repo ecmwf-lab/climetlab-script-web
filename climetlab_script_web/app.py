@@ -18,7 +18,7 @@ def hello_world():
     return {"data": "hello esowc!"}
 
 
-@app.route("/cache")
+@app.route("/api/v1/cache/all")
 def cache_db():
     data = subprocess.run(
         ["climetlab", "cache", "--all", "--json"],
@@ -28,6 +28,7 @@ def cache_db():
 
     data = "".join(data.split())
     data = json.loads(data)
+    # print(type(data))
     return {"data": data}
 
 

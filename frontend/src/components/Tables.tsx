@@ -12,7 +12,7 @@ export const CacheTable = () => {
             <thead tw="text-left font-semibold">
                 <Tr>
                     <Th>
-                        <CheckboxInput inputName="checkkbox" />
+                        <CheckboxInput inputName="checkbox" />
                     </Th>
                     <Th>Name</Th>
                     <Th>Filetype</Th>
@@ -26,7 +26,7 @@ export const CacheTable = () => {
             <tbody>
                 <Tr>
                     <Th>
-                        <CheckboxInput inputName="checkkbox" />
+                        <CheckboxInput inputName="checkbox" />
                     </Th>
                     <Td>Hurricane-kjsadhfdlk0as-jhfkjsdhf-lhjsdfkjshdf</Td>
                     <Td>GRIB</Td>
@@ -38,7 +38,7 @@ export const CacheTable = () => {
                 </Tr>
                 <Tr>
                     <Th>
-                        <CheckboxInput inputName="checkkbox" />
+                        <CheckboxInput inputName="checkbox" />
                     </Th>
                     <Td>Hurricane-kjsadhfdlk0as-jhfkjsdhf-lhjsdfkjshdf</Td>
                     <Td>GRIB</Td>
@@ -50,7 +50,7 @@ export const CacheTable = () => {
                 </Tr>
                 <Tr>
                     <Th>
-                        <CheckboxInput inputName="checkkbox" />
+                        <CheckboxInput inputName="checkbox" />
                     </Th>
                     <Td>Hurricane-kjsadhfdlk0as-jhfkjsdhf-lhjsdfkjshdf</Td>
                     <Td>GRIB</Td>
