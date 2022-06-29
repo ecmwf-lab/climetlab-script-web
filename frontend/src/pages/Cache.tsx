@@ -93,7 +93,7 @@ const Cache = () => {
                                 inputName="fileSize"
                                 inputLabel="File Size"
                                 displayMin={0}
-                                displayMax={1000}
+                                displayMax={100000}
                                 initMinVal={100}
                                 initMaxVal={800}
                                 step={100}

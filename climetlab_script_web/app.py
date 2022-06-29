@@ -92,7 +92,14 @@ def cache_capabilities():
 #     return result
 
 
-# db.execute("SELECT * FROM cache"):
+# f = Matcher({"owner": "owner_name_1", "file-name": "file_name_1"})
+# request.args = {
+#     "larger": "100",
+#     "smaller": "700",
+#     "newer": "1d",  # different datetime options
+#     "older": "1d",
+#     "match": "any_text",
+# }
 
 
 @app.route("/api/cache", methods=["GET", "DELETE"])
