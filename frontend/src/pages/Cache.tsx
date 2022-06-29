@@ -20,18 +20,50 @@ import { CacheTable } from './../components/Tables'
 import { HeaderTitle } from './../components/Text'
 import { SubmitButton } from './../components/Buttons'
 
+export interface CacheInterface {
+    accesses: number
+    args: {
+        parts: string | null
+        url: string
+    }
+    creation_date: string
+    expires: null | string
+    extra: null | string
+    flags: number
+    last_access: string
+    owner: string
+    owner_data: {
+        'accept-ranges': string
+        connection: string
+        'content-encoding': string
+        'content-type': string
+        date: string
+        'keep-alive': string
+        'last-modified': string
+        server: string
+        'strict-transport-security': string
+        vary: string
+        'x-frame-options': string
+    }
+    parent: null | string
+    path: string
+    replaced: null | string
+    size: number
+    type: string
+}
+
 const Cache = () => {
-    const [data, setData] = useState<[] | null>(null)
+    const [cacheData, setCacheData] = useState<CacheInterface[]>([])
 
     useEffect(() => {
-        fetch('/api/v1/cache/all')
+        fetch('/api/cache')
             .then((res) => res.json())
             .then((res) => {
-                setData(res.data)
+                setCacheData(res.entries)
             })
     }, [])
 
-    data && data.map((obj) => console.log(obj['creation_date']))
+    // data && data.map((obj) => console.log(obj['creation_date']))
     return (
         <Layout>
             <Container>
@@ -54,7 +86,7 @@ const Cache = () => {
                                     { name: 'netcdf', label: 'NetCDF' },
                                 ]}
                             />
-                            <TextInput inputName="owner" inputLabel="Owner" />
+                            <TextInput inputName="date" inputLabel="Date" />
                         </InputColumn>
                         <InputColumn>
                             <MultiRangeSlider
@@ -74,7 +106,7 @@ const Cache = () => {
                 </ContainerHeader>
                 {/* Container body with table */}
                 <ContainerBody>
-                    <CacheTable />
+                    <CacheTable cacheData={cacheData} />
                 </ContainerBody>
             </Container>
         </Layout>

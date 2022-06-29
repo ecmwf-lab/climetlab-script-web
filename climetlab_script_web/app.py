@@ -23,24 +23,6 @@ def index():
     return send_from_directory(app.static_folder, "index.html")
 
 
-@app.route("/api")
-def hello_world():
-    return {"data": "hello esowc!"}
-
-
-# @app.route("/cache")
-# def cache_db():
-#    data = subprocess.run(
-#        ["climetlab", "cache", "--all", "--json"],
-#        capture_output=True,
-#        text=True,
-#    ).stdout
-#
-#    data = "".join(data.split())
-#    data = json.loads(data)
-#    return {"data": data}
-
-
 @app.route("/api/cache/capabilities")
 def cache_capabilities():
     res = CacheCmd().do_cache._kwargs_specifications
@@ -62,6 +44,55 @@ def cache_capabilities():
         "directory": cache_directory(),
         "capabilities": res,
     }
+
+
+# /api/cache?file-name=""
+# /api/cache?owner=""
+# /api/cache?file-type=""
+# /api/cache?min-date-accessed=""&max-date-accessed=""
+# /api/cache/min-file-size=""&max-file-size=""
+
+# Inside core/caching _dump_cache_database
+
+# filter_params = {
+#     "file-name": "",
+#     "owner": "",
+#     "file-type": "",
+#     "min-date-accessed": "",
+#     "max-date-accessed": "",
+#     "min-file-size": "",
+#     "max-file-size": "",
+# }
+
+# for f in filter_params:
+#     if f is not None:
+#         with self.connection as db:
+#             query_result = db.execute("SELECT * FROM cache")
+#             for row in query_result:
+#                 row = dict(row)
+#
+#                 for key in ("args", "owner_data"):
+#                     if row[key] is not None:
+#                         row[key] = json.loads(row[key])
+#
+#
+#
+
+
+# def _dump_cache_database(self, filter_params: dict):
+#     result = []
+#     with self.connection as db:
+#         for d in db.execute("SELECT * FROM cache"):
+#             n = dict(d)
+#             for k in ("args", "owner_data"):
+#                 if n[k] is not None:
+#                     n[k] = json.loads(n[k])
+#             if matcher(n):
+#                 result.append(n)
+#     return result
+
+
+# db.execute("SELECT * FROM cache"):
 
 
 @app.route("/api/cache", methods=["GET", "DELETE"])
