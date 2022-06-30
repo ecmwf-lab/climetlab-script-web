@@ -10,11 +10,7 @@ import {
     InputColumn,
 } from './../components/Layout'
 
-import {
-    TextInput,
-    SelectInput,
-    MultiRangeSlider,
-} from './../components/Inputs'
+import { TextInput, SelectInput } from './../components/Inputs'
 
 import { CacheTable } from './../components/Tables'
 import { HeaderTitle } from './../components/Text'
