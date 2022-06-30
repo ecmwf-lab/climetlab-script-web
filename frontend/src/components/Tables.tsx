@@ -19,7 +19,6 @@ export const CacheTable = ({ cacheData }: { cacheData: CacheInterface[] }) => {
                     <Th>Filetype</Th>
                     <Th>Size</Th>
                     <Th>Date</Th>
-                    <Th>Source</Th>
                     <Th>Owner</Th>
                     <Th>Argument</Th>
                 </Tr>
@@ -52,7 +51,6 @@ export const CacheTable = ({ cacheData }: { cacheData: CacheInterface[] }) => {
                         </Td>
                         <Td>{obj.size}</Td>
                         <Td>{obj.creation_date}</Td>
-                        <Td>Top Secret Satellite</Td>
                         <Td>{obj.owner}</Td>
                         <Td>{JSON.stringify(obj.args)}</Td>
                     </Tr>
