@@ -63,7 +63,6 @@ const Cache = () => {
             })
     }, [])
 
-    // data && data.map((obj) => console.log(obj['creation_date']))
     return (
         <Layout>
             <Container>
@@ -71,13 +70,7 @@ const Cache = () => {
                     <HeaderTitle>Cache</HeaderTitle>
                     <div tw="grid grid-cols-1 gap-4 md:(grid-cols-3 gap-12) lg:gap-16">
                         <InputColumn>
-                            <TextInput
-                                inputName="filename"
-                                inputLabel="Filename"
-                            />
-                            <TextInput inputName="owner" inputLabel="Owner" />
-                        </InputColumn>
-                        <InputColumn>
+                            <TextInput inputName="search" inputLabel="Search" />
                             <SelectInput
                                 inputName="fileType"
                                 inputLabel="File Type"
@@ -86,18 +79,13 @@ const Cache = () => {
                                     { name: 'netcdf', label: 'NetCDF' },
                                 ]}
                             />
-                            <TextInput inputName="date" inputLabel="Date" />
                         </InputColumn>
                         <InputColumn>
-                            <MultiRangeSlider
+                            <TextInput
                                 inputName="fileSize"
                                 inputLabel="File Size"
-                                displayMin={0}
-                                displayMax={100000}
-                                initMinVal={100}
-                                initMaxVal={800}
-                                step={100}
                             />
+                            <TextInput inputName="date" inputLabel="Date" />
                         </InputColumn>
                     </div>
                     <div tw="self-center md:(self-start text-end pl-16)">
