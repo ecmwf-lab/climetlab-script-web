@@ -52,45 +52,6 @@ def cache_capabilities():
 # /api/cache?min-date-accessed=""&max-date-accessed=""
 # /api/cache/min-file-size=""&max-file-size=""
 
-# Inside core/caching _dump_cache_database
-
-# filter_params = {
-#     "file-name": "",
-#     "owner": "",
-#     "file-type": "",
-#     "min-date-accessed": "",
-#     "max-date-accessed": "",
-#     "min-file-size": "",
-#     "max-file-size": "",
-# }
-
-# for f in filter_params:
-#     if f is not None:
-#         with self.connection as db:
-#             query_result = db.execute("SELECT * FROM cache")
-#             for row in query_result:
-#                 row = dict(row)
-#
-#                 for key in ("args", "owner_data"):
-#                     if row[key] is not None:
-#                         row[key] = json.loads(row[key])
-#
-#
-#
-
-
-# def _dump_cache_database(self, filter_params: dict):
-#     result = []
-#     with self.connection as db:
-#         for d in db.execute("SELECT * FROM cache"):
-#             n = dict(d)
-#             for k in ("args", "owner_data"):
-#                 if n[k] is not None:
-#                     n[k] = json.loads(n[k])
-#             if matcher(n):
-#                 result.append(n)
-#     return result
-
 
 # f = Matcher({"owner": "owner_name_1", "file-name": "file_name_1"})
 # request.args = {
@@ -104,9 +65,10 @@ def cache_capabilities():
 
 @app.route("/api/cache", methods=["GET", "DELETE"])
 def cache():
+    print(dict(request.args))
     matcher = Matcher(dict(request.args))
     if request.method == "GET":
-        return {"entries": dump_cache_database(matcher=matcher)}
+        return {"data": dump_cache_database(matcher=matcher)}
     if request.method == "DELETE":
         purge_cache(matcher=matcher)
         return {"ok": "ok"}  # TODO

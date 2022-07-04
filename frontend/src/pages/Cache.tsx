@@ -1,3 +1,4 @@
+import axios from 'axios'
 import 'twin.macro'
 import 'styled-components/macro'
 import { useState, useEffect } from 'react'
@@ -48,15 +49,30 @@ export interface CacheInterface {
     type: string
 }
 
+interface CacheResponseInterface {
+    data: CacheInterface[]
+}
+
 const Cache = () => {
+    // input form data states
+    const [formInputSearch, setFormInputSearch] = useState<string>('')
+
+    // cache response state
     const [cacheData, setCacheData] = useState<CacheInterface[]>([])
 
+    const handleSubmit = (event: React.SyntheticEvent) => {
+        event.preventDefault()
+        axios.get('/api/cache/', {
+            params: {
+                match: { formInputSearch },
+            },
+        })
+    }
+
     useEffect(() => {
-        fetch('/api/cache')
-            .then((res) => res.json())
-            .then((res) => {
-                setCacheData(res.entries)
-            })
+        axios
+            .get<CacheResponseInterface>('/api/cache')
+            .then((res) => setCacheData(res.data.data))
     }, [])
 
     return (
@@ -64,29 +80,46 @@ const Cache = () => {
             <Container>
                 <ContainerHeader>
                     <HeaderTitle>Cache</HeaderTitle>
-                    <div tw="grid grid-cols-1 gap-4 md:(grid-cols-3 gap-12) lg:gap-16">
-                        <InputColumn>
-                            <TextInput inputName="search" inputLabel="Search" />
-                            <SelectInput
-                                inputName="fileType"
-                                inputLabel="File Type"
-                                inputOptions={[
-                                    { name: 'grib', label: 'GRIB' },
-                                    { name: 'netcdf', label: 'NetCDF' },
-                                ]}
-                            />
-                        </InputColumn>
-                        <InputColumn>
-                            <TextInput
-                                inputName="fileSize"
-                                inputLabel="File Size"
-                            />
-                            <TextInput inputName="date" inputLabel="Date" />
-                        </InputColumn>
-                    </div>
-                    <div tw="self-center md:(self-start text-end pl-16)">
-                        <SubmitButton>apply</SubmitButton>
-                    </div>
+                    <form tw="flex flex-col space-y-4 h-full w-full md:(flex-row justify-between)">
+                        <div tw="grid grid-cols-1 gap-4 md:(grid-cols-3 gap-12) lg:gap-16">
+                            <InputColumn>
+                                <TextInput
+                                    inputName="search"
+                                    inputLabel="Search"
+                                    value={formInputSearch}
+                                    setState={setFormInputSearch}
+                                />
+                                <SelectInput
+                                    inputName="fileType"
+                                    inputLabel="File Type"
+                                    inputOptions={[
+                                        { name: 'grib', label: 'GRIB' },
+                                        { name: 'netcdf', label: 'NetCDF' },
+                                    ]}
+                                />
+                            </InputColumn>
+                            <InputColumn>
+                                <TextInput
+                                    inputName="fileSize"
+                                    inputLabel="File Size"
+                                    value=""
+                                    setState={setFormInputSearch}
+                                />
+                                <TextInput
+                                    inputName="date"
+                                    inputLabel="Date"
+                                    value=""
+                                    setState={setFormInputSearch}
+                                />
+                            </InputColumn>
+                        </div>
+                        <div
+                            onSubmit={handleSubmit}
+                            tw="self-center md:(self-start text-end pl-16)"
+                        >
+                            <SubmitButton>apply</SubmitButton>
+                        </div>
+                    </form>
                 </ContainerHeader>
                 {/* Container body with table */}
                 <ContainerBody>

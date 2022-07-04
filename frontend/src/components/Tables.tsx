@@ -25,7 +25,7 @@ export const CacheTable = ({ cacheData }: { cacheData: CacheInterface[] }) => {
             </thead>
             <tbody>
                 {cacheData.map((obj) => (
-                    <Tr>
+                    <Tr key={obj.path}>
                         <Th>
                             <CheckboxInput inputName="checkbox" />
                         </Th>

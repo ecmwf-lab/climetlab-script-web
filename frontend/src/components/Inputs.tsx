@@ -24,8 +24,17 @@ export const CheckboxInput = ({ inputName }: { inputName: string }) => {
     )
 }
 
+interface TextInputInterface extends InputInterface {
+    value: string
+    setState: React.Dispatch<React.SetStateAction<string>>
+}
 // text input
-export const TextInput = ({ inputName, inputLabel }: InputInterface) => {
+export const TextInput = ({
+    inputName,
+    inputLabel,
+    value,
+    setState,
+}: TextInputInterface) => {
     return (
         <InputStyle>
             <span> {inputLabel} </span>
@@ -33,6 +42,8 @@ export const TextInput = ({ inputName, inputLabel }: InputInterface) => {
                 tw="box-border rounded-lg px-2 py-1"
                 type="text"
                 name={inputName}
+                value={value}
+                onChange={(event) => setState(event.target.value)}
             />
         </InputStyle>
     )
