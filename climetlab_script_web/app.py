@@ -65,7 +65,6 @@ def cache_capabilities():
 
 @app.route("/api/cache", methods=["GET", "DELETE"])
 def cache():
-    print(dict(request.args))
     matcher = Matcher(dict(request.args))
     if request.method == "GET":
         return {"data": dump_cache_database(matcher=matcher)}

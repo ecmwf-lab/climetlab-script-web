@@ -1,7 +1,7 @@
 import axios from 'axios'
 import 'twin.macro'
 import 'styled-components/macro'
-import { useState, useEffect } from 'react'
+import { useState } from 'react'
 
 import {
     Layout,
@@ -49,38 +49,44 @@ export interface CacheInterface {
     type: string
 }
 
-interface CacheResponseInterface {
-    data: CacheInterface[]
-}
+// for fetching all cache below
+// interface CacheResponseInterface {
+//     data: CacheInterface[]
+// }
 
 const Cache = () => {
     // input form data states
     const [formInputSearch, setFormInputSearch] = useState<string>('')
+    const [formInputFileSize, setFormInputFileSize] = useState<string>('')
+    // const [formInputFileType, setFormInputFileType] = useState<string>('')
+    const [formInputDate, setFormInputDate] = useState<string>('')
 
     // cache response state
     const [cacheData, setCacheData] = useState<CacheInterface[]>([])
 
     const handleSubmit = (event: React.SyntheticEvent) => {
         event.preventDefault()
-        axios.get('/api/cache/', {
-            params: {
-                match: { formInputSearch },
-            },
-        })
+        axios
+            .get('/api/cache', { params: { match: formInputSearch } })
+            .then((res) => setCacheData(res.data.data))
     }
 
-    useEffect(() => {
-        axios
-            .get<CacheResponseInterface>('/api/cache')
-            .then((res) => setCacheData(res.data.data))
-    }, [])
+    // display all cache on first page load
+    // useEffect(() => {
+    //     axios
+    //         .get<CacheResponseInterface>('/api/cache')
+    //         .then((res) => setCacheData(res.data.data))
+    // }, [])
 
     return (
         <Layout>
             <Container>
                 <ContainerHeader>
                     <HeaderTitle>Cache</HeaderTitle>
-                    <form tw="flex flex-col space-y-4 h-full w-full md:(flex-row justify-between)">
+                    <form
+                        onSubmit={handleSubmit}
+                        tw="flex flex-col space-y-4 h-full w-full md:(flex-row justify-between)"
+                    >
                         <div tw="grid grid-cols-1 gap-4 md:(grid-cols-3 gap-12) lg:gap-16">
                             <InputColumn>
                                 <TextInput
@@ -102,21 +108,18 @@ const Cache = () => {
                                 <TextInput
                                     inputName="fileSize"
                                     inputLabel="File Size"
-                                    value=""
-                                    setState={setFormInputSearch}
+                                    value={formInputFileSize}
+                                    setState={setFormInputFileSize}
                                 />
                                 <TextInput
                                     inputName="date"
                                     inputLabel="Date"
-                                    value=""
-                                    setState={setFormInputSearch}
+                                    value={formInputDate}
+                                    setState={setFormInputDate}
                                 />
                             </InputColumn>
                         </div>
-                        <div
-                            onSubmit={handleSubmit}
-                            tw="self-center md:(self-start text-end pl-16)"
-                        >
+                        <div tw="self-center md:(self-start text-end pl-16)">
                             <SubmitButton>apply</SubmitButton>
                         </div>
                     </form>
