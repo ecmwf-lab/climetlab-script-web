@@ -27,6 +27,8 @@ export const CheckboxInput = ({ inputName }: { inputName: string }) => {
 interface TextInputInterface extends InputInterface {
     value: string
     setState: React.Dispatch<React.SetStateAction<string>>
+    isFormOpen?: boolean
+    setIsFormOpen?: React.Dispatch<React.SetStateAction<boolean>>
 }
 // text input
 export const TextInput = ({
@@ -34,17 +36,30 @@ export const TextInput = ({
     inputLabel,
     value,
     setState,
+    isFormOpen,
+    setIsFormOpen,
 }: TextInputInterface) => {
     return (
         <InputStyle>
             <span> {inputLabel} </span>
-            <input
-                tw="box-border rounded-lg px-2 py-1"
-                type="text"
-                name={inputName}
-                value={value}
-                onChange={(event) => setState(event.target.value)}
-            />
+            {setIsFormOpen ? (
+                <input
+                    tw="box-border rounded-lg px-2 py-1"
+                    type="text"
+                    name={inputName}
+                    value={value}
+                    onChange={(event) => setState(event.target.value)}
+                    onFocus={() => setIsFormOpen(!isFormOpen)}
+                />
+            ) : (
+                <input
+                    tw="box-border rounded-lg px-2 py-1"
+                    type="text"
+                    name={inputName}
+                    value={value}
+                    onChange={(event) => setState(event.target.value)}
+                />
+            )}
         </InputStyle>
     )
 }

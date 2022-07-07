@@ -54,13 +54,25 @@ export interface CacheInterface {
 //     data: CacheInterface[]
 // }
 
+const FileSizePicker = () => {
+    return (
+        <div tw="absolute z-50 bg-blue-200 mt-1 p-4">
+            <p> pick file size</p>
+        </div>
+    )
+}
+
 const Cache = () => {
     // input form data states
     const [formInputSearch, setFormInputSearch] = useState<string>('')
     const [formInputMinFileSize, setFormInputMinFileSize] = useState<string>('')
     const [formInputMaxFileSize, setFormInputMaxFileSize] = useState<string>('')
     // const [formInputFileType, setFormInputFileType] = useState<string>('')
-    const [formInputDate, setFormInputDate] = useState<string>('')
+    // const [formInputDate, setFormInputDate] = useState<string>('')
+
+    // filesize and date modal state
+    const [isFormInputFileSizeOpen, setIsFormInputFileSizeOpen] =
+        useState<boolean>(false)
 
     // cache response state
     const [cacheData, setCacheData] = useState<CacheInterface[]>([])
@@ -106,14 +118,21 @@ const Cache = () => {
                                 />
                             </InputColumn>
                             <InputColumn>
-                                <div tw="flex flex-row w-full justify-between md:(space-y-0 space-x-4)">
+                                <div tw="relative flex flex-row w-full justify-between md:(space-y-0 space-x-4)">
                                     <div tw="w-2/5">
                                         <TextInput
                                             inputName="minFileSize"
                                             inputLabel="Min File Size"
                                             value={formInputMinFileSize}
                                             setState={setFormInputMinFileSize}
+                                            isFormOpen={isFormInputFileSizeOpen}
+                                            setIsFormOpen={
+                                                setIsFormInputFileSizeOpen
+                                            }
                                         />
+                                        {isFormInputFileSizeOpen && (
+                                            <FileSizePicker />
+                                        )}
                                     </div>
                                     <div tw="w-2/5">
                                         <TextInput
@@ -142,12 +161,6 @@ const Cache = () => {
                                         />
                                     </div>
                                 </div>
-                                {/* <TextInput */}
-                                {/*     inputName="date" */}
-                                {/*     inputLabel="Date" */}
-                                {/*     value={formInputDate} */}
-                                {/*     setState={setFormInputDate} */}
-                                {/* /> */}
                             </InputColumn>
                         </div>
                         <div tw="self-center md:(self-start text-end pl-16)">
