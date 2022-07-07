@@ -1,6 +1,6 @@
-import axios from 'axios'
 import 'twin.macro'
 import 'styled-components/macro'
+import axios from 'axios'
 import { useState } from 'react'
 
 import {
@@ -57,7 +57,8 @@ export interface CacheInterface {
 const Cache = () => {
     // input form data states
     const [formInputSearch, setFormInputSearch] = useState<string>('')
-    const [formInputFileSize, setFormInputFileSize] = useState<string>('')
+    const [formInputMinFileSize, setFormInputMinFileSize] = useState<string>('')
+    const [formInputMaxFileSize, setFormInputMaxFileSize] = useState<string>('')
     // const [formInputFileType, setFormInputFileType] = useState<string>('')
     const [formInputDate, setFormInputDate] = useState<string>('')
 
@@ -85,9 +86,9 @@ const Cache = () => {
                     <HeaderTitle>Cache</HeaderTitle>
                     <form
                         onSubmit={handleSubmit}
-                        tw="flex flex-col space-y-4 h-full w-full md:(flex-row justify-between)"
+                        tw="flex flex-col w-full space-y-4 h-full w-full md:(flex-row justify-between)"
                     >
-                        <div tw="grid grid-cols-1 gap-4 md:(grid-cols-3 gap-12) lg:gap-16">
+                        <div tw="grid w-full grid-cols-1 gap-4 md:(grid-cols-3 gap-12) lg:gap-16">
                             <InputColumn>
                                 <TextInput
                                     inputName="search"
@@ -105,18 +106,48 @@ const Cache = () => {
                                 />
                             </InputColumn>
                             <InputColumn>
-                                <TextInput
-                                    inputName="fileSize"
-                                    inputLabel="File Size"
-                                    value={formInputFileSize}
-                                    setState={setFormInputFileSize}
-                                />
-                                <TextInput
-                                    inputName="date"
-                                    inputLabel="Date"
-                                    value={formInputDate}
-                                    setState={setFormInputDate}
-                                />
+                                <div tw="flex flex-row w-full justify-between md:(space-y-0 space-x-4)">
+                                    <div tw="w-2/5">
+                                        <TextInput
+                                            inputName="minFileSize"
+                                            inputLabel="Min File Size"
+                                            value={formInputMinFileSize}
+                                            setState={setFormInputMinFileSize}
+                                        />
+                                    </div>
+                                    <div tw="w-2/5">
+                                        <TextInput
+                                            inputName="maxFileSize"
+                                            inputLabel="Max File Size"
+                                            value={formInputMaxFileSize}
+                                            setState={setFormInputMaxFileSize}
+                                        />
+                                    </div>
+                                </div>
+                                <div tw="flex flex-row w-full justify-between md:(space-y-0 space-x-4)">
+                                    <div tw="w-2/5">
+                                        <TextInput
+                                            inputName="minFileSize"
+                                            inputLabel="Newer Than"
+                                            value={formInputMinFileSize}
+                                            setState={setFormInputMinFileSize}
+                                        />
+                                    </div>
+                                    <div tw="w-2/5">
+                                        <TextInput
+                                            inputName="maxFileSize"
+                                            inputLabel="Older Than"
+                                            value={formInputMaxFileSize}
+                                            setState={setFormInputMaxFileSize}
+                                        />
+                                    </div>
+                                </div>
+                                {/* <TextInput */}
+                                {/*     inputName="date" */}
+                                {/*     inputLabel="Date" */}
+                                {/*     value={formInputDate} */}
+                                {/*     setState={setFormInputDate} */}
+                                {/* /> */}
                             </InputColumn>
                         </div>
                         <div tw="self-center md:(self-start text-end pl-16)">
