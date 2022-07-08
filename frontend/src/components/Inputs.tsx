@@ -1,20 +1,19 @@
 import tw from 'twin.macro'
 import 'styled-components/macro'
 import { useEffect, useState, useRef } from 'react'
+import {
+    InputInterface,
+    TextInputInterface,
+    SelectInputInterface,
+    MultiRangeSliderInputInterface,
+} from './../interfaces/inputs'
 
-//========== style ===============
+//========== base style ===============
 const InputStyle = tw.label`flex flex-col w-full text-base space-y-2 sm:(space-y-4) md:(w-full space-y-6 text-lg)`
 
 //========== html input ===============
-
-// Base input interface
-interface InputInterface {
-    inputName: string
-    inputLabel: string
-}
-
 // check box
-export const CheckboxInput = ({ inputName }: { inputName: string }) => {
+export const CheckboxInput = ({ inputName }: InputInterface) => {
     return (
         <input
             tw="block box-border border-gray-100 rounded-lg md:(h-4 w-4) lg:(h-6 w-6)"
@@ -24,12 +23,6 @@ export const CheckboxInput = ({ inputName }: { inputName: string }) => {
     )
 }
 
-interface TextInputInterface extends InputInterface {
-    value: string
-    setState: React.Dispatch<React.SetStateAction<string>>
-    isFormOpen?: boolean
-    setIsFormOpen?: React.Dispatch<React.SetStateAction<boolean>>
-}
 // text input
 export const TextInput = ({
     inputName,
@@ -65,13 +58,6 @@ export const TextInput = ({
 }
 
 // select input
-interface SelectInputInterface extends InputInterface {
-    inputOptions: {
-        name: string
-        label: string
-    }[]
-}
-
 export const SelectInput = ({
     inputName,
     inputLabel,
@@ -95,17 +81,8 @@ export const SelectInput = ({
 }
 
 // multi range slider
-
-interface MultiRangeSliderInputInterface extends InputInterface {
-    displayMin: number
-    displayMax: number
-    initMinVal: number
-    initMaxVal: number
-    step: number
-}
-
 export const MultiRangeSlider = ({
-    inputName,
+    // inputName,
     inputLabel,
     displayMin,
     displayMax,

@@ -1,7 +1,9 @@
 import 'twin.macro'
 import 'styled-components/macro'
+
 import axios from 'axios'
-import { useState, useEffect, useRef } from 'react'
+import { useState } from 'react'
+import useClickOutside from './../hooks/useClickOutside'
 
 import {
     Layout,
@@ -9,94 +11,41 @@ import {
     ContainerHeader,
     ContainerBody,
     InputColumn,
-} from './../components/Layout'
-
+} from './../components/LayoutContainers'
+import { HeaderTitle } from './../components/Text'
+import { CacheTable } from './../components/Tables'
+import { SubmitButton } from './../components/Buttons'
 import { FileSizePicker } from './../components/Dropdowns'
-
 import { TextInput, SelectInput } from './../components/Inputs'
 
-import { CacheTable } from './../components/Tables'
-import { HeaderTitle } from './../components/Text'
-import { SubmitButton } from './../components/Buttons'
-
-export interface CacheInterface {
-    accesses: number
-    args: {
-        parts: string | null
-        url: string
-    }
-    creation_date: string
-    expires: null | string
-    extra: null | string
-    flags: number
-    last_access: string
-    owner: string
-    owner_data: {
-        'accept-ranges': string
-        connection: string
-        'content-encoding': string
-        'content-type': string
-        date: string
-        'keep-alive': string
-        'last-modified': string
-        server: string
-        'strict-transport-security': string
-        vary: string
-        'x-frame-options': string
-    }
-    parent: null | string
-    path: string
-    replaced: null | string
-    size: number
-    type: string
-}
-
-// for fetching all cache below
-// interface CacheResponseInterface {
-//     data: CacheInterface[]
-// }
+import { CacheInterface } from './../interfaces/cache'
 
 const Cache = () => {
-    // input form data states
+    // form input
     const [formInputSearch, setFormInputSearch] = useState<string>('')
     const [formInputMinFileSize, setFormInputMinFileSize] = useState<string>('')
     const [formInputMaxFileSize, setFormInputMaxFileSize] = useState<string>('')
 
-    // filesize and date dropdown state
+    // dropwdown open/close
     const [isFormInputFileSizeOpen, setIsFormInputFileSizeOpen] =
         useState<boolean>(false)
 
-    // cache response state
+    // cache response
     const [cacheData, setCacheData] = useState<CacheInterface[]>([])
 
+    // close input menu by click outside
+    const formFileSizePickerRef = useClickOutside(() =>
+        setIsFormInputFileSizeOpen(false)
+    )
+
+    // TODO: CONVERT THE FORM INPUT STATE INTO AN OBJECT
+    // submit form to search cache based on provided input
     const handleSubmit = (event: React.SyntheticEvent) => {
         event.preventDefault()
         axios
             .get('/api/cache', { params: { match: formInputSearch } })
             .then((res) => setCacheData(res.data.data))
     }
-
-    // ref to close form modal/dropdown on clicking outside
-    const formFileSizePickerRef = useRef<HTMLDivElement>(null)
-
-    useEffect(() => {
-        let handler = (event: MouseEvent) => {
-            if (!formFileSizePickerRef.current) {
-                throw Error('formFileSizePickerRef not defined!')
-            }
-            if (
-                !formFileSizePickerRef.current.contains(
-                    event.target as HTMLElement
-                )
-            ) {
-                setIsFormInputFileSizeOpen(false)
-            }
-        }
-        document.addEventListener('mousedown', handler)
-        return () => {
-            document.removeEventListener('mousedown', handler)
-        }
-    })
 
     // display all cache on first page load
     // useEffect(() => {

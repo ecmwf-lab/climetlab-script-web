@@ -1,7 +1,7 @@
 import tw from 'twin.macro'
 import 'styled-components/macro'
 import { CheckboxInput } from './Inputs'
-import { CacheInterface } from './../pages/Cache'
+import { CacheInterface } from './../interfaces/cache'
 
 const Th = tw.th`px-2 py-4 text-base md:(text-lg px-4 py-6)`
 const Tr = tw.tr`border-b border-blue-200`
