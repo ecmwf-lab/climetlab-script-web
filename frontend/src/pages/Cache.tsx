@@ -1,7 +1,7 @@
 import 'twin.macro'
 import 'styled-components/macro'
 import axios from 'axios'
-import { useState } from 'react'
+import { useState, useEffect, useRef } from 'react'
 
 import {
     Layout,
@@ -10,6 +10,8 @@ import {
     ContainerBody,
     InputColumn,
 } from './../components/Layout'
+
+import { FileSizePicker } from './../components/Dropdowns'
 
 import { TextInput, SelectInput } from './../components/Inputs'
 
@@ -54,23 +56,13 @@ export interface CacheInterface {
 //     data: CacheInterface[]
 // }
 
-const FileSizePicker = () => {
-    return (
-        <div tw="absolute z-50 bg-blue-200 mt-1 p-4">
-            <p> pick file size</p>
-        </div>
-    )
-}
-
 const Cache = () => {
     // input form data states
     const [formInputSearch, setFormInputSearch] = useState<string>('')
     const [formInputMinFileSize, setFormInputMinFileSize] = useState<string>('')
     const [formInputMaxFileSize, setFormInputMaxFileSize] = useState<string>('')
-    // const [formInputFileType, setFormInputFileType] = useState<string>('')
-    // const [formInputDate, setFormInputDate] = useState<string>('')
 
-    // filesize and date modal state
+    // filesize and date dropdown state
     const [isFormInputFileSizeOpen, setIsFormInputFileSizeOpen] =
         useState<boolean>(false)
 
@@ -83,6 +75,28 @@ const Cache = () => {
             .get('/api/cache', { params: { match: formInputSearch } })
             .then((res) => setCacheData(res.data.data))
     }
+
+    // ref to close form modal/dropdown on clicking outside
+    const formFileSizePickerRef = useRef<HTMLDivElement>(null)
+
+    useEffect(() => {
+        let handler = (event: MouseEvent) => {
+            if (!formFileSizePickerRef.current) {
+                throw Error('formFileSizePickerRef not defined!')
+            }
+            if (
+                !formFileSizePickerRef.current.contains(
+                    event.target as HTMLElement
+                )
+            ) {
+                setIsFormInputFileSizeOpen(false)
+            }
+        }
+        document.addEventListener('mousedown', handler)
+        return () => {
+            document.removeEventListener('mousedown', handler)
+        }
+    })
 
     // display all cache on first page load
     // useEffect(() => {
@@ -131,7 +145,10 @@ const Cache = () => {
                                             }
                                         />
                                         {isFormInputFileSizeOpen && (
-                                            <FileSizePicker />
+                                            <FileSizePicker
+                                                testProp="lmao"
+                                                ref={formFileSizePickerRef}
+                                            />
                                         )}
                                     </div>
                                     <div tw="w-2/5">
