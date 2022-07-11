@@ -15,7 +15,10 @@ import {
 import { HeaderTitle } from './../components/Text'
 import { CacheTable } from './../components/Tables'
 import { SubmitButton } from './../components/Buttons'
-import { MinFileSizeDropdown } from './../components/Dropdowns'
+import {
+    MinFileSizeDropdown,
+    MaxFileSizeDropdown,
+} from './../components/Dropdowns'
 import { TextInput, SelectInput } from './../components/Inputs'
 
 import { CacheInterface } from './../interfaces/cache'
@@ -23,7 +26,6 @@ import { CacheInterface } from './../interfaces/cache'
 const Cache = () => {
     // form input
     const [inputSearch, setInputSearch] = useState<string>('')
-    // const [inputMinFileSize, setInputMinFileSize] = useState<string>('')
     const [inputMinFileSize, setInputMinFileSize] = useState<{
         inputValue: string
         inputType: string
@@ -31,21 +33,33 @@ const Cache = () => {
         inputValue: '',
         inputType: '',
     })
-    const [inputMaxFileSize, setInputMaxFileSize] = useState<string>('')
+    const [inputMaxFileSize, setInputMaxFileSize] = useState<{
+        inputValue: string
+        inputType: string
+    }>({
+        inputValue: '',
+        inputType: '',
+    })
     const [inputFileType, setInputFileType] = useState<string>('')
 
     // dropwdown open/close
     const [isMinFileSizeDropdownOpen, setIsMinFileSizeDropdownOpen] =
         useState<boolean>(false)
 
+    const [isMaxFileSizeDropdownOpen, setIsMaxFileSizeDropdownOpen] =
+        useState<boolean>(false)
+
     // cache response
     const [cacheData, setCacheData] = useState<CacheInterface[]>([])
 
     // close input menu by click outside
-    const fileSizeDropdownRef = useClickOutside(() =>
+    const minFileSizeDropdownRef = useClickOutside(() =>
         setIsMinFileSizeDropdownOpen(false)
     )
 
+    const maxFileSizeDropdownRef = useClickOutside(() =>
+        setIsMaxFileSizeDropdownOpen(false)
+    )
     // TODO: CONVERT THE FORM INPUT STATE INTO AN OBJECT
     // submit form to search cache based on provided input
     const handleSubmit = (event: React.SyntheticEvent) => {
@@ -53,6 +67,7 @@ const Cache = () => {
         const queryObj = {
             match: inputSearch,
             larger: inputMinFileSize.inputValue + inputMinFileSize.inputType,
+            smaller: inputMaxFileSize.inputValue + inputMaxFileSize.inputType,
         }
         axios
             // .get('/api/cache', { params: { match: inputSearch } })
@@ -102,7 +117,7 @@ const Cache = () => {
                                         <TextInput
                                             inputName="minFileSize"
                                             inputLabel="Min File Size"
-                                            state={`${inputMinFileSize.inputValue} ${inputMinFileSize.inputType} `}
+                                            state={`${inputMinFileSize.inputValue} ${inputMinFileSize.inputType}`}
                                             setIsDropdownOpen={
                                                 setIsMinFileSizeDropdownOpen
                                             }
@@ -113,7 +128,7 @@ const Cache = () => {
                                                 setIsDropdownOpen={
                                                     setIsMinFileSizeDropdownOpen
                                                 }
-                                                ref={fileSizeDropdownRef}
+                                                ref={minFileSizeDropdownRef}
                                             />
                                         )}
                                     </div>
@@ -121,9 +136,20 @@ const Cache = () => {
                                         <TextInput
                                             inputName="maxFileSize"
                                             inputLabel="Max File Size"
-                                            state={inputMaxFileSize}
-                                            setState={setInputMaxFileSize}
+                                            state={`${inputMaxFileSize.inputValue} ${inputMaxFileSize.inputType}`}
+                                            setIsDropdownOpen={
+                                                setIsMaxFileSizeDropdownOpen
+                                            }
                                         />
+                                        {isMaxFileSizeDropdownOpen && (
+                                            <MaxFileSizeDropdown
+                                                setState={setInputMaxFileSize}
+                                                setIsDropdownOpen={
+                                                    setIsMaxFileSizeDropdownOpen
+                                                }
+                                                ref={maxFileSizeDropdownRef}
+                                            />
+                                        )}
                                     </div>
                                 </div>
                                 <div tw="flex flex-row w-full justify-between md:(space-y-0 space-x-4)">

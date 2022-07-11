@@ -6,7 +6,7 @@ import {
     TextInputInterface,
     SelectInputInterface,
     MultiRangeSliderInputInterface,
-} from './../interfaces/inputs'
+} from './../interfaces/input'
 
 //========== base style ===============
 const InputStyle = tw.label`flex flex-col w-full text-base space-y-2 md:(w-full text-lg) lg:(space-y-4)`
