@@ -15,27 +15,34 @@ import {
 import { HeaderTitle } from './../components/Text'
 import { CacheTable } from './../components/Tables'
 import { SubmitButton } from './../components/Buttons'
-import { FileSizePicker } from './../components/Dropdowns'
+import { MinFileSizeDropdown } from './../components/Dropdowns'
 import { TextInput, SelectInput } from './../components/Inputs'
 
 import { CacheInterface } from './../interfaces/cache'
 
 const Cache = () => {
     // form input
-    const [formInputSearch, setFormInputSearch] = useState<string>('')
-    const [formInputMinFileSize, setFormInputMinFileSize] = useState<string>('')
-    const [formInputMaxFileSize, setFormInputMaxFileSize] = useState<string>('')
+    const [inputSearch, setInputSearch] = useState<string>('')
+    // const [inputMinFileSize, setInputMinFileSize] = useState<string>('')
+    const [inputMinFileSize, setInputMinFileSize] = useState<{
+        inputValue: string
+        inputType: string
+    }>({
+        inputValue: '',
+        inputType: '',
+    })
+    const [inputMaxFileSize, setInputMaxFileSize] = useState<string>('')
 
     // dropwdown open/close
-    const [isFormInputFileSizeOpen, setIsFormInputFileSizeOpen] =
+    const [isMinFileSizeDropdownOpen, setIsMinFileSizeDropdownOpen] =
         useState<boolean>(false)
 
     // cache response
     const [cacheData, setCacheData] = useState<CacheInterface[]>([])
 
     // close input menu by click outside
-    const formFileSizePickerRef = useClickOutside(() =>
-        setIsFormInputFileSizeOpen(false)
+    const fileSizeDropdownRef = useClickOutside(() =>
+        setIsMinFileSizeDropdownOpen(false)
     )
 
     // TODO: CONVERT THE FORM INPUT STATE INTO AN OBJECT
@@ -43,7 +50,7 @@ const Cache = () => {
     const handleSubmit = (event: React.SyntheticEvent) => {
         event.preventDefault()
         axios
-            .get('/api/cache', { params: { match: formInputSearch } })
+            .get('/api/cache', { params: { match: inputSearch } })
             .then((res) => setCacheData(res.data.data))
     }
 
@@ -68,17 +75,18 @@ const Cache = () => {
                                 <TextInput
                                     inputName="search"
                                     inputLabel="Search"
-                                    value={formInputSearch}
-                                    setState={setFormInputSearch}
+                                    state={inputSearch}
+                                    setState={setInputSearch}
                                 />
-                                <SelectInput
-                                    inputName="fileType"
-                                    inputLabel="File Type"
-                                    inputOptions={[
-                                        { name: 'grib', label: 'GRIB' },
-                                        { name: 'netcdf', label: 'NetCDF' },
-                                    ]}
-                                />
+                                {/* <SelectInput */}
+                                {/*     inputName="fileType" */}
+                                {/*     inputLabel="File Type" */}
+                                {/*     inputOptions={[ */}
+                                {/*         { name: '', label: '' }, */}
+                                {/*         { name: 'grib', label: 'GRIB' }, */}
+                                {/*         { name: 'netcdf', label: 'NetCDF' }, */}
+                                {/*     ]} */}
+                                {/* /> */}
                             </InputColumn>
                             <InputColumn>
                                 <div tw="relative flex flex-row w-full justify-between md:(space-y-0 space-x-4)">
@@ -86,17 +94,18 @@ const Cache = () => {
                                         <TextInput
                                             inputName="minFileSize"
                                             inputLabel="Min File Size"
-                                            value={formInputMinFileSize}
-                                            setState={setFormInputMinFileSize}
-                                            isFormOpen={isFormInputFileSizeOpen}
-                                            setIsFormOpen={
-                                                setIsFormInputFileSizeOpen
+                                            state={`${inputMinFileSize.inputValue} ${inputMinFileSize.inputType} `}
+                                            setIsDropdownOpen={
+                                                setIsMinFileSizeDropdownOpen
                                             }
                                         />
-                                        {isFormInputFileSizeOpen && (
-                                            <FileSizePicker
-                                                testProp="lmao"
-                                                ref={formFileSizePickerRef}
+                                        {isMinFileSizeDropdownOpen && (
+                                            <MinFileSizeDropdown
+                                                setState={setInputMinFileSize}
+                                                setIsDropdownOpen={
+                                                    setIsMinFileSizeDropdownOpen
+                                                }
+                                                ref={fileSizeDropdownRef}
                                             />
                                         )}
                                     </div>
@@ -104,27 +113,27 @@ const Cache = () => {
                                         <TextInput
                                             inputName="maxFileSize"
                                             inputLabel="Max File Size"
-                                            value={formInputMaxFileSize}
-                                            setState={setFormInputMaxFileSize}
+                                            state={inputMaxFileSize}
+                                            setState={setInputMaxFileSize}
                                         />
                                     </div>
                                 </div>
                                 <div tw="flex flex-row w-full justify-between md:(space-y-0 space-x-4)">
                                     <div tw="w-2/5">
-                                        <TextInput
-                                            inputName="minFileSize"
-                                            inputLabel="Newer Than"
-                                            value={formInputMinFileSize}
-                                            setState={setFormInputMinFileSize}
-                                        />
+                                        {/* <TextInput */}
+                                        {/*     inputName="minFileSize" */}
+                                        {/*     inputLabel="Newer Than" */}
+                                        {/*     state={inputMinFileSize} */}
+                                        {/*     setState={setInputMinFileSize} */}
+                                        {/* /> */}
                                     </div>
                                     <div tw="w-2/5">
-                                        <TextInput
-                                            inputName="maxFileSize"
-                                            inputLabel="Older Than"
-                                            value={formInputMaxFileSize}
-                                            setState={setFormInputMaxFileSize}
-                                        />
+                                        {/* <TextInput */}
+                                        {/*     inputName="maxFileSize" */}
+                                        {/*     inputLabel="Older Than" */}
+                                        {/*     state={inputMaxFileSize} */}
+                                        {/*     setState={setInputMaxFileSize} */}
+                                        {/* /> */}
                                     </div>
                                 </div>
                             </InputColumn>

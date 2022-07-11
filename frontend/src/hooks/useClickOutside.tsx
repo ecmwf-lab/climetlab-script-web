@@ -6,10 +6,10 @@ const useClickOutside = (handler: () => void) => {
 
     useEffect(() => {
         let tempHandler = (event: MouseEvent) => {
-            if (!domNode.current) {
-                throw Error('formFileSizePickerRef not defined!')
-            }
-            if (!domNode.current.contains(event.target as HTMLElement)) {
+            if (
+                domNode.current &&
+                !domNode.current.contains(event.target as HTMLElement)
+            ) {
                 handler()
             }
         }

@@ -4,13 +4,14 @@ export interface InputInterface {
 }
 
 export interface TextInputInterface extends InputInterface {
-    value: string
-    setState: React.Dispatch<React.SetStateAction<string>>
-    isFormOpen?: boolean
-    setIsFormOpen?: React.Dispatch<React.SetStateAction<boolean>>
+    state: string
+    setState?: React.Dispatch<React.SetStateAction<string>>
+    setIsDropdownOpen?: React.Dispatch<React.SetStateAction<boolean>>
 }
 
 export interface SelectInputInterface extends InputInterface {
+    state: string
+    setState: React.Dispatch<React.SetStateAction<string>>
     inputOptions: {
         name: string
         label: string

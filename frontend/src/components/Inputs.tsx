@@ -9,14 +9,14 @@ import {
 } from './../interfaces/inputs'
 
 //========== base style ===============
-const InputStyle = tw.label`flex flex-col w-full text-base space-y-2 sm:(space-y-4) md:(w-full space-y-6 text-lg)`
+const InputStyle = tw.label`flex flex-col w-full text-base space-y-2 md:(w-full text-lg) lg:(space-y-4)`
 
 //========== html input ===============
 // check box
 export const CheckboxInput = ({ inputName }: InputInterface) => {
     return (
         <input
-            tw="block box-border border-gray-100 rounded-lg md:(h-4 w-4) lg:(h-6 w-6)"
+            tw="block box-border border-gray-400 rounded-lg md:(h-4 w-4) lg:(h-6 w-6)"
             type="checkbox"
             name={inputName}
         />
@@ -27,30 +27,31 @@ export const CheckboxInput = ({ inputName }: InputInterface) => {
 export const TextInput = ({
     inputName,
     inputLabel,
-    value,
+    state,
     setState,
-    isFormOpen,
-    setIsFormOpen,
+    setIsDropdownOpen,
 }: TextInputInterface) => {
     return (
         <InputStyle>
             <span> {inputLabel} </span>
-            {setIsFormOpen ? (
+            {setIsDropdownOpen ? (
                 <input
-                    tw="box-border rounded-lg px-2 py-1"
+                    readOnly
+                    tw="box-border border border-gray-400 rounded-lg px-2 py-1"
                     type="text"
                     name={inputName}
-                    value={value}
-                    onChange={(event) => setState(event.target.value)}
-                    onFocus={() => setIsFormOpen(!isFormOpen)}
+                    value={state}
+                    onFocus={() => setIsDropdownOpen(true)}
                 />
             ) : (
                 <input
-                    tw="box-border rounded-lg px-2 py-1"
+                    tw="box-border border border-gray-400 rounded-lg px-2 py-1"
                     type="text"
                     name={inputName}
-                    value={value}
-                    onChange={(event) => setState(event.target.value)}
+                    value={state}
+                    onChange={(event) =>
+                        setState && setState(event.target.value)
+                    }
                 />
             )}
         </InputStyle>
@@ -61,14 +62,18 @@ export const TextInput = ({
 export const SelectInput = ({
     inputName,
     inputLabel,
+    state,
+    setState,
     inputOptions,
 }: SelectInputInterface) => {
     return (
         <InputStyle>
             <span> {inputLabel} </span>
             <select
-                tw="box-border rounded-lg bg-white px-3 py-2"
+                tw="box-border border border-gray-400 rounded-lg bg-white px-3 py-2"
                 name={inputName}
+                value={state}
+                onChange={(event) => setState(event.target.value)}
             >
                 {inputOptions.map((obj) => (
                     <option key={obj.name} value={obj.name}>
