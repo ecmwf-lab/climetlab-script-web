@@ -32,6 +32,7 @@ const Cache = () => {
         inputType: '',
     })
     const [inputMaxFileSize, setInputMaxFileSize] = useState<string>('')
+    const [inputFileType, setInputFileType] = useState<string>('')
 
     // dropwdown open/close
     const [isMinFileSizeDropdownOpen, setIsMinFileSizeDropdownOpen] =
@@ -49,8 +50,13 @@ const Cache = () => {
     // submit form to search cache based on provided input
     const handleSubmit = (event: React.SyntheticEvent) => {
         event.preventDefault()
+        const queryObj = {
+            match: inputSearch,
+            larger: inputMinFileSize.inputValue + inputMinFileSize.inputType,
+        }
         axios
-            .get('/api/cache', { params: { match: inputSearch } })
+            // .get('/api/cache', { params: { match: inputSearch } })
+            .get('/api/cache', { params: queryObj })
             .then((res) => setCacheData(res.data.data))
     }
 
@@ -78,15 +84,17 @@ const Cache = () => {
                                     state={inputSearch}
                                     setState={setInputSearch}
                                 />
-                                {/* <SelectInput */}
-                                {/*     inputName="fileType" */}
-                                {/*     inputLabel="File Type" */}
-                                {/*     inputOptions={[ */}
-                                {/*         { name: '', label: '' }, */}
-                                {/*         { name: 'grib', label: 'GRIB' }, */}
-                                {/*         { name: 'netcdf', label: 'NetCDF' }, */}
-                                {/*     ]} */}
-                                {/* /> */}
+                                <SelectInput
+                                    inputName="fileType"
+                                    inputLabel="File Type"
+                                    state={inputFileType}
+                                    setState={setInputFileType}
+                                    inputOptions={[
+                                        { name: '', label: '' },
+                                        { name: 'grib', label: 'GRIB' },
+                                        { name: 'netcdf', label: 'NetCDF' },
+                                    ]}
+                                />
                             </InputColumn>
                             <InputColumn>
                                 <div tw="relative flex flex-row w-full justify-between md:(space-y-0 space-x-4)">
