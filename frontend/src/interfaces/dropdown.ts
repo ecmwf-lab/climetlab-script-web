@@ -1,4 +1,4 @@
-export interface FileSizeDropdownInterface {
+export interface DropdownInterface {
     setState: React.Dispatch<
         React.SetStateAction<{ inputValue: string; inputType: string }>
     >

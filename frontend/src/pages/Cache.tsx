@@ -2,7 +2,7 @@ import 'twin.macro'
 import 'styled-components/macro'
 
 import axios from 'axios'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import useClickOutside from './../hooks/useClickOutside'
 
 import {
@@ -12,62 +12,104 @@ import {
     ContainerBody,
     InputColumn,
 } from './../components/LayoutContainers'
+import {
+    LargerThanFileSizeDropdown,
+    SmallerThanFileSizeDropdown,
+    NewerThanFileDateDropdown,
+    OlderThanFileDateDropdown,
+} from './../components/Dropdowns'
 import { HeaderTitle } from './../components/Text'
 import { CacheTable } from './../components/Tables'
 import { SubmitButton } from './../components/Buttons'
-import {
-    MinFileSizeDropdown,
-    MaxFileSizeDropdown,
-} from './../components/Dropdowns'
 import { TextInput, SelectInput } from './../components/Inputs'
 
-import { CacheInterface } from './../interfaces/cache'
+import { CacheInterface, CacheResponseInterface } from './../interfaces/cache'
 
 const Cache = () => {
     // form input
     const [inputSearch, setInputSearch] = useState<string>('')
-    const [inputMinFileSize, setInputMinFileSize] = useState<{
+
+    const [inputLargerThanFileSize, setInputLargerThanFileSize] = useState<{
         inputValue: string
         inputType: string
     }>({
         inputValue: '',
         inputType: '',
     })
-    const [inputMaxFileSize, setInputMaxFileSize] = useState<{
+    const [inputSmallerThanFileSize, setInputSmallerThanFileSize] = useState<{
         inputValue: string
         inputType: string
     }>({
         inputValue: '',
         inputType: '',
     })
+
+    const [inputNewerThanFileDate, setInputNewerThanFileDate] = useState<{
+        inputValue: string
+        inputType: string
+    }>({
+        inputValue: '',
+        inputType: '',
+    })
+    const [inputOlderThanFileDate, setInputOlderThanFileDate] = useState<{
+        inputValue: string
+        inputType: string
+    }>({
+        inputValue: '',
+        inputType: '',
+    })
+
     const [inputFileType, setInputFileType] = useState<string>('')
 
     // dropwdown open/close
-    const [isMinFileSizeDropdownOpen, setIsMinFileSizeDropdownOpen] =
-        useState<boolean>(false)
+    const [
+        isLargerThanFileSizeDropdownOpen,
+        setIsLargerThanFileSizeDropdownOpen,
+    ] = useState<boolean>(false)
 
-    const [isMaxFileSizeDropdownOpen, setIsMaxFileSizeDropdownOpen] =
-        useState<boolean>(false)
+    const [
+        isSmallerThanFileSizeDropdownOpen,
+        setIsSmallerThanFileSizeDropdownOpen,
+    ] = useState<boolean>(false)
+
+    const [
+        isNewerThanFileDateDropdownOpen,
+        setIsNewerThanFileDateDropdownOpen,
+    ] = useState<boolean>(false)
+    const [
+        isOlderThanFileDateDropdownOpen,
+        setIsOlderThanFileDateDropdownOpen,
+    ] = useState<boolean>(false)
 
     // cache response
     const [cacheData, setCacheData] = useState<CacheInterface[]>([])
 
     // close input menu by click outside
-    const minFileSizeDropdownRef = useClickOutside(() =>
-        setIsMinFileSizeDropdownOpen(false)
+    const largerThanFileSizeDropdownRef = useClickOutside(() =>
+        setIsLargerThanFileSizeDropdownOpen(false)
+    )
+    const smallerThanFileSizeDropdownRef = useClickOutside(() =>
+        setIsSmallerThanFileSizeDropdownOpen(false)
     )
 
-    const maxFileSizeDropdownRef = useClickOutside(() =>
-        setIsMaxFileSizeDropdownOpen(false)
+    const newerThanFileDateDropdownRef = useClickOutside(() =>
+        setIsNewerThanFileDateDropdownOpen(false)
     )
-    // TODO: CONVERT THE FORM INPUT STATE INTO AN OBJECT
+    const olderThanFileDateDropdownRef = useClickOutside(() =>
+        setIsOlderThanFileDateDropdownOpen(false)
+    )
+
     // submit form to search cache based on provided input
     const handleSubmit = (event: React.SyntheticEvent) => {
         event.preventDefault()
         const queryObj = {
             match: inputSearch,
-            larger: inputMinFileSize.inputValue + inputMinFileSize.inputType,
-            smaller: inputMaxFileSize.inputValue + inputMaxFileSize.inputType,
+            larger:
+                inputLargerThanFileSize.inputValue +
+                inputLargerThanFileSize.inputType,
+            smaller:
+                inputSmallerThanFileSize.inputValue +
+                inputSmallerThanFileSize.inputType,
         }
         axios
             // .get('/api/cache', { params: { match: inputSearch } })
@@ -76,11 +118,11 @@ const Cache = () => {
     }
 
     // display all cache on first page load
-    // useEffect(() => {
-    //     axios
-    //         .get<CacheResponseInterface>('/api/cache')
-    //         .then((res) => setCacheData(res.data.data))
-    // }, [])
+    useEffect(() => {
+        axios
+            .get<CacheResponseInterface>('/api/cache')
+            .then((res) => setCacheData(res.data.data))
+    }, [])
 
     return (
         <Layout>
@@ -112,23 +154,27 @@ const Cache = () => {
                                 />
                             </InputColumn>
                             <InputColumn>
-                                <div tw="relative flex flex-row w-full justify-between md:(space-y-0 space-x-4)">
+                                <div tw="relative z-10 flex flex-row w-full justify-between md:(space-y-0 space-x-4)">
                                     <div tw="w-2/5">
                                         <TextInput
                                             inputName="minFileSize"
                                             inputLabel="Min File Size"
-                                            state={`${inputMinFileSize.inputValue} ${inputMinFileSize.inputType}`}
+                                            state={`${inputLargerThanFileSize.inputValue} ${inputLargerThanFileSize.inputType}`}
                                             setIsDropdownOpen={
-                                                setIsMinFileSizeDropdownOpen
+                                                setIsLargerThanFileSizeDropdownOpen
                                             }
                                         />
-                                        {isMinFileSizeDropdownOpen && (
-                                            <MinFileSizeDropdown
-                                                setState={setInputMinFileSize}
-                                                setIsDropdownOpen={
-                                                    setIsMinFileSizeDropdownOpen
+                                        {isLargerThanFileSizeDropdownOpen && (
+                                            <LargerThanFileSizeDropdown
+                                                setState={
+                                                    setInputLargerThanFileSize
                                                 }
-                                                ref={minFileSizeDropdownRef}
+                                                setIsDropdownOpen={
+                                                    setIsLargerThanFileSizeDropdownOpen
+                                                }
+                                                ref={
+                                                    largerThanFileSizeDropdownRef
+                                                }
                                             />
                                         )}
                                     </div>
@@ -136,38 +182,72 @@ const Cache = () => {
                                         <TextInput
                                             inputName="maxFileSize"
                                             inputLabel="Max File Size"
-                                            state={`${inputMaxFileSize.inputValue} ${inputMaxFileSize.inputType}`}
+                                            state={`${inputSmallerThanFileSize.inputValue} ${inputSmallerThanFileSize.inputType}`}
                                             setIsDropdownOpen={
-                                                setIsMaxFileSizeDropdownOpen
+                                                setIsSmallerThanFileSizeDropdownOpen
                                             }
                                         />
-                                        {isMaxFileSizeDropdownOpen && (
-                                            <MaxFileSizeDropdown
-                                                setState={setInputMaxFileSize}
-                                                setIsDropdownOpen={
-                                                    setIsMaxFileSizeDropdownOpen
+                                        {isSmallerThanFileSizeDropdownOpen && (
+                                            <SmallerThanFileSizeDropdown
+                                                setState={
+                                                    setInputSmallerThanFileSize
                                                 }
-                                                ref={maxFileSizeDropdownRef}
+                                                setIsDropdownOpen={
+                                                    setIsSmallerThanFileSizeDropdownOpen
+                                                }
+                                                ref={
+                                                    smallerThanFileSizeDropdownRef
+                                                }
                                             />
                                         )}
                                     </div>
                                 </div>
-                                <div tw="flex flex-row w-full justify-between md:(space-y-0 space-x-4)">
+                                <div tw="relative flex flex-row w-full justify-between md:(space-y-0 space-x-4)">
                                     <div tw="w-2/5">
-                                        {/* <TextInput */}
-                                        {/*     inputName="minFileSize" */}
-                                        {/*     inputLabel="Newer Than" */}
-                                        {/*     state={inputMinFileSize} */}
-                                        {/*     setState={setInputMinFileSize} */}
-                                        {/* /> */}
+                                        <TextInput
+                                            inputName="newerThanFileDate"
+                                            inputLabel="Newer Than"
+                                            state={`${inputNewerThanFileDate.inputValue} ${inputNewerThanFileDate.inputType}`}
+                                            setIsDropdownOpen={
+                                                setIsNewerThanFileDateDropdownOpen
+                                            }
+                                        />
+                                        {isNewerThanFileDateDropdownOpen && (
+                                            <NewerThanFileDateDropdown
+                                                setState={
+                                                    setInputNewerThanFileDate
+                                                }
+                                                setIsDropdownOpen={
+                                                    setIsNewerThanFileDateDropdownOpen
+                                                }
+                                                ref={
+                                                    newerThanFileDateDropdownRef
+                                                }
+                                            />
+                                        )}
                                     </div>
                                     <div tw="w-2/5">
-                                        {/* <TextInput */}
-                                        {/*     inputName="maxFileSize" */}
-                                        {/*     inputLabel="Older Than" */}
-                                        {/*     state={inputMaxFileSize} */}
-                                        {/*     setState={setInputMaxFileSize} */}
-                                        {/* /> */}
+                                        <TextInput
+                                            inputName="olderThanFileDate"
+                                            inputLabel="Older Than"
+                                            state={`${inputOlderThanFileDate.inputValue} ${inputOlderThanFileDate.inputType}`}
+                                            setIsDropdownOpen={
+                                                setIsOlderThanFileDateDropdownOpen
+                                            }
+                                        />
+                                        {isOlderThanFileDateDropdownOpen && (
+                                            <OlderThanFileDateDropdown
+                                                setState={
+                                                    setInputOlderThanFileDate
+                                                }
+                                                setIsDropdownOpen={
+                                                    setIsOlderThanFileDateDropdownOpen
+                                                }
+                                                ref={
+                                                    olderThanFileDateDropdownRef
+                                                }
+                                            />
+                                        )}
                                     </div>
                                 </div>
                             </InputColumn>

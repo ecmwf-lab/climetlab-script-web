@@ -31,6 +31,6 @@ export interface CacheInterface {
 }
 
 // for fetching all cache
-// export interface CacheResponseInterface {
-//     data: CacheInterface[]
-// }
+export interface CacheResponseInterface {
+    data: CacheInterface[]
+}
