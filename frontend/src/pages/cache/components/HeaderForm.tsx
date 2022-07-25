@@ -27,8 +27,14 @@ const HeaderForm = ({
     // ================================
     // form input states
     // ================================
+
+    // ======= text search =======
     const [inputSearch, setInputSearch] = useState<string>('')
 
+    // ======= file type =======
+    const [inputFileType, setInputFileType] = useState<string>('')
+
+    // ======= file size - larger =======
     const [inputLargerThanFileSize, setInputLargerThanFileSize] = useState<{
         inputValue: string
         inputType: string
@@ -36,6 +42,8 @@ const HeaderForm = ({
         inputValue: '',
         inputType: '',
     })
+
+    // ======= file size - smaller =======
     const [inputSmallerThanFileSize, setInputSmallerThanFileSize] = useState<{
         inputValue: string
         inputType: string
@@ -44,6 +52,7 @@ const HeaderForm = ({
         inputType: '',
     })
 
+    // ======= file date - newer =======
     const [inputNewerThanFileDate, setInputNewerThanFileDate] = useState<{
         inputValue: string
         inputType: string
@@ -51,6 +60,8 @@ const HeaderForm = ({
         inputValue: '',
         inputType: '',
     })
+
+    // ======= file date - older =======
     const [inputOlderThanFileDate, setInputOlderThanFileDate] = useState<{
         inputValue: string
         inputType: string
@@ -58,8 +69,6 @@ const HeaderForm = ({
         inputValue: '',
         inputType: '',
     })
-
-    const [inputFileType, setInputFileType] = useState<string>('')
 
     // ================================
     // submit form to search cache
@@ -86,7 +95,7 @@ const HeaderForm = ({
             onSubmit={cacheFormSubmit}
             tw="flex flex-col w-full space-y-4 h-full w-full md:(flex-row justify-between)"
         >
-            {/* Row/Column in component names are based on desktop layout and not mobile layou.  */}
+            {/* 'Row/Column' in component names are based on desktop layout and not mobile layout. */}
             <InputRow>
                 <InputColumn>
                     <SearchInput

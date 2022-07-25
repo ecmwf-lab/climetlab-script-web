@@ -1,12 +1,15 @@
 import tw from 'twin.macro'
 import 'styled-components/macro'
+
+// hooks
 import useClickOutside from '../hooks/useClickOutside'
 
+// local components
 const DropdownContainer = tw.div`absolute w-5/6 bg-white border border-gray-400 rounded-lg mt-1 pt-2 pb-4 px-4 md:(w-full mt-2)`
 const DropdownLayout = tw.div`flex flex-auto flex-col w-full`
 const DropdownBody = tw.div`flex flex-row space-x-2`
 
-export const Dropdown = ({
+const Dropdown = ({
     setIsDropdownOpen,
     children,
 }: {
@@ -32,3 +35,5 @@ export const Dropdown = ({
         </DropdownContainer>
     )
 }
+
+export default Dropdown

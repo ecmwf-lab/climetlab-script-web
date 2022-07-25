@@ -1,6 +1,8 @@
 import tw from 'twin.macro'
 import 'styled-components/macro'
 import { useEffect, useState, useRef } from 'react'
+
+// interfaces
 import {
     InputInterface,
     TextInputInterface,
@@ -8,11 +10,16 @@ import {
     MultiRangeSliderInputInterface,
 } from './../interfaces/input'
 
-//========== base style ===============
+//======================================
+// base style
+//======================================
 const InputStyle = tw.label`flex flex-col w-full text-base space-y-2 md:(w-full text-lg) lg:(space-y-4)`
 
-//========== html input ===============
-// check box
+//======================================
+// html input
+//======================================
+
+//===== check box ======
 export const CheckboxInput = ({ inputName }: InputInterface) => {
     return (
         <input
@@ -23,7 +30,7 @@ export const CheckboxInput = ({ inputName }: InputInterface) => {
     )
 }
 
-// text input
+//===== text input =====
 export const TextInput = ({
     inputName,
     inputLabel,
@@ -58,7 +65,7 @@ export const TextInput = ({
     )
 }
 
-// select input
+//===== select input =====
 export const SelectInput = ({
     inputName,
     inputLabel,
@@ -85,7 +92,7 @@ export const SelectInput = ({
     )
 }
 
-// multi range slider
+//===== multi range slider =====
 export const MultiRangeSlider = ({
     // inputName,
     inputLabel,

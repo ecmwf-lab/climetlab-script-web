@@ -4,12 +4,14 @@ import 'styled-components/macro'
 import { useEffect, useState } from 'react'
 
 // global components
-import { Dropdown } from './../../../components/Dropdowns'
+import Dropdown from './../../../components/Dropdowns'
 import { SelectInput, TextInput } from './../../../components/Inputs'
 
 //===================================================
 // Size
 //===================================================
+
+// interface
 interface FileSizeDropdownInterface {
     state: { inputValue: string; inputType: string }
     setState: React.Dispatch<
@@ -18,6 +20,7 @@ interface FileSizeDropdownInterface {
     setIsDropdownOpen: React.Dispatch<React.SetStateAction<boolean>>
 }
 
+// component
 export const FileSizeDropdown = ({
     state,
     setState,
@@ -65,6 +68,8 @@ export const FileSizeDropdown = ({
 //===================================================
 // Date
 //===================================================
+
+// interface
 interface FileDateDropdownInterface {
     state: { inputValue: string; inputType: string }
     setState: React.Dispatch<
@@ -73,6 +78,7 @@ interface FileDateDropdownInterface {
     setIsDropdownOpen: React.Dispatch<React.SetStateAction<boolean>>
 }
 
+// component
 export const FileDateDropdown = ({
     state,
     setState,
