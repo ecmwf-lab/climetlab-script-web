@@ -6,6 +6,7 @@ import { CacheInterface } from './../interfaces/cache'
 const Th = tw.th`px-2 py-4 text-base md:(text-lg px-4 py-6)`
 const Tr = tw.tr`border-b border-blue-200`
 const Td = tw.td`px-2 py-2 text-base md:(text-lg px-4 py-4)`
+const Subtext = tw.span`font-normal text-gray-500 text-sm md:text-base`
 
 export const CacheTable = ({ cacheData }: { cacheData: CacheInterface[] }) => {
     return (
@@ -17,8 +18,18 @@ export const CacheTable = ({ cacheData }: { cacheData: CacheInterface[] }) => {
                     </Th>
                     <Th>Name</Th>
                     <Th>Filetype</Th>
-                    <Th>Size</Th>
-                    <Th>Date</Th>
+                    <Th>
+                        Size{' '}
+                        <Subtext tw="text-gray-500 text-sm md:text-base">
+                            (bytes)
+                        </Subtext>
+                    </Th>
+                    <Th>
+                        Date{' '}
+                        <Subtext tw="text-gray-500 text-sm md:text-base">
+                            (y-m-d h:m:s)
+                        </Subtext>
+                    </Th>
                     <Th>Owner</Th>
                     <Th>Argument</Th>
                 </Tr>
@@ -50,7 +61,7 @@ export const CacheTable = ({ cacheData }: { cacheData: CacheInterface[] }) => {
                             }
                         </Td>
                         <Td>{obj.size}</Td>
-                        <Td>{obj.creation_date}</Td>
+                        <Td>{obj.creation_date.split('.')[0]}</Td>
                         <Td>{obj.owner}</Td>
                         <Td>{JSON.stringify(obj.args)}</Td>
                     </Tr>

@@ -3,7 +3,7 @@ import 'styled-components/macro'
 
 // import components
 import Navbar from './components/Navbar'
-import Cache from './pages/Cache'
+import Cache from './pages/cache/Cache'
 
 const App = () => {
     return (
