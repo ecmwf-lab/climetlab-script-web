@@ -47,5 +47,5 @@ export const ContainerHeader = ({
         </>
     )
 }
-// export const ContainerHeader = tw.div`flex flex-col space-y-4 p-4 md:(flex-row justify-between items-center space-y-0 space-x-12 p-6) lg:(p-8) bg-gray-200`
+
 export const ContainerBody = tw.div`flex flex-col w-full overflow-x-auto space-y-4 p-4 md:(p-6) lg:p-8 bg-gray-100`
