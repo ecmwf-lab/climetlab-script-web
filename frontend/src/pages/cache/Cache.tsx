@@ -10,7 +10,6 @@ import {
     ContainerHeader,
     ContainerBody,
 } from './../../components/Containers'
-import { HeaderTitle } from './../../components/Text'
 import { CacheTable } from './../../components/Tables'
 
 // local components
@@ -36,7 +35,6 @@ const Cache = () => {
     return (
         <Container>
             <ContainerHeader>
-                <HeaderTitle>Cache</HeaderTitle>
                 <HeaderForm setCacheData={setCacheData} />
             </ContainerHeader>
             <ContainerBody>
