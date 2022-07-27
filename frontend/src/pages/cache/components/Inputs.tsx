@@ -1,3 +1,6 @@
+import 'twin.macro'
+import 'styled-components/macro'
+
 import { useState } from 'react'
 
 // global components
@@ -54,10 +57,12 @@ export const FileTypeInput = ({
 //===============================================================
 // File Size
 //===============================================================
+
 export const FileSizeInput = ({
     variant,
     state,
     setState,
+    dropdownAligment,
 }: {
     variant: 'larger' | 'smaller'
     state: {
@@ -70,6 +75,7 @@ export const FileSizeInput = ({
             inputType: string
         }>
     >
+    dropdownAligment: 'left' | 'right'
 }) => {
     const [isDropdownOpen, setIsDropdownOpen] = useState<boolean>(false)
 
@@ -84,11 +90,14 @@ export const FileSizeInput = ({
                 setIsDropdownOpen={setIsDropdownOpen}
             />
             {isDropdownOpen && (
-                <FileSizeDropdown
-                    state={state}
-                    setState={setState}
-                    setIsDropdownOpen={setIsDropdownOpen}
-                />
+                <div tw="mt-1 w-5/6 md:w-full">
+                    <FileSizeDropdown
+                        state={state}
+                        setState={setState}
+                        dropdownAligment={dropdownAligment}
+                        setIsDropdownOpen={setIsDropdownOpen}
+                    />
+                </div>
             )}
         </>
     )

@@ -4,7 +4,7 @@ import 'styled-components/macro'
 import { useEffect, useState } from 'react'
 
 // global components
-import Dropdown from './../../../components/Dropdowns'
+import { Dropdown, DropdownNEW } from './../../../components/Dropdowns'
 import { SelectInput, TextInput } from './../../../components/Inputs'
 
 //===================================================
@@ -17,6 +17,7 @@ interface FileSizeDropdownInterface {
     setState: React.Dispatch<
         React.SetStateAction<{ inputValue: string; inputType: string }>
     >
+    dropdownAligment: 'left' | 'right'
     setIsDropdownOpen: React.Dispatch<React.SetStateAction<boolean>>
 }
 
@@ -24,6 +25,7 @@ interface FileSizeDropdownInterface {
 export const FileSizeDropdown = ({
     state,
     setState,
+    dropdownAligment,
     setIsDropdownOpen,
 }: FileSizeDropdownInterface) => {
     // Local form state.
@@ -36,7 +38,10 @@ export const FileSizeDropdown = ({
     }, [setState, inputValue, inputType])
 
     return (
-        <Dropdown setIsDropdownOpen={setIsDropdownOpen}>
+        <DropdownNEW
+            setIsDropdownOpen={setIsDropdownOpen}
+            dropdownAligment={dropdownAligment}
+        >
             {/* Input by default are set to w-full. */}
             {/* Therefore, we use external divs to control for width. */}
             <div tw="w-3/5">
@@ -61,7 +66,7 @@ export const FileSizeDropdown = ({
                     ]}
                 />
             </div>
-        </Dropdown>
+        </DropdownNEW>
     )
 }
 

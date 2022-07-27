@@ -109,18 +109,20 @@ const HeaderForm = ({
                 </InputColumn>
                 <InputColumn>
                     <div tw="relative z-10 flex flex-row w-full justify-between md:(space-y-0 space-x-4)">
-                        <div tw="w-2/5">
+                        <div tw=" w-2/5">
                             <FileSizeInput
                                 variant="larger"
                                 state={inputLargerThanFileSize}
                                 setState={setInputLargerThanFileSize}
+                                dropdownAligment="left"
                             />
                         </div>
-                        <div tw="w-2/5">
+                        <div tw=" w-2/5">
                             <FileSizeInput
                                 variant="smaller"
                                 state={inputSmallerThanFileSize}
                                 setState={setInputSmallerThanFileSize}
+                                dropdownAligment="right"
                             />
                         </div>
                     </div>

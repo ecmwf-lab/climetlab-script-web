@@ -30,7 +30,7 @@ const JsonArgs = ({
     cacheArgs: { parts: string | null; url: string }
 }) => {
     const [isOpen, setIsOpen] = useState<boolean>(false)
-    console.log(Array.isArray(cacheArgs))
+
     return (
         <>
             {isOpen ? (
