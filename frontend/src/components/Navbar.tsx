@@ -10,7 +10,7 @@ const Navbar = () => {
             <ul tw="flex flex-row justify-between items-center px-4 py-2 sm:(px-6 py-4) md:(px-8 py-6) lg:(px-10 py-8)">
                 <li>
                     <img
-                        tw="bg-gray-100 p-2 rounded-xl h-12 md:h-16"
+                        tw="bg-gray-100 p-2 rounded-2xl h-12 md:h-16"
                         src={logo}
                         alt="logo"
                     />

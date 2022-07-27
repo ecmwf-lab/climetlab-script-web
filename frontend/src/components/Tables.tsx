@@ -31,23 +31,25 @@ const JsonArgs = ({
 }) => {
     const [isOpen, setIsOpen] = useState<boolean>(false)
     console.log(Array.isArray(cacheArgs))
-
     return (
         <>
             {isOpen ? (
                 <div
                     onClick={() => setIsOpen(!isOpen)}
-                    tw="absolute top-0 left-0 overflow-x-auto bg-white border p-3"
+                    tw="relative z-40 absolute top-0 right-0 overflow-x-auto bg-white border p-3"
                 >
                     {/* pretty print logic for if cacheArgs is an array  */}
-                    <div tw="flex flex-col overflow-x-auto">
-                        {Array.isArray(cacheArgs) &&
-                            cacheArgs.map((item) => (
-                                <span key={item}>{item}</span>
+                    {Array.isArray(cacheArgs) && (
+                        <div tw="flex flex-col">
+                            {cacheArgs.map((item) => (
+                                <span key={item}>{item},</span>
                             ))}
-                    </div>
+                        </div>
+                    )}
                     {/* pretty print logic for if cacheArgs is an object  */}
-                    {isObject(cacheArgs) && <span>lmao</span>}
+                    {isObject(cacheArgs) && (
+                        <div>{<span>{JSON.stringify(cacheArgs)}</span>}</div>
+                    )}
                 </div>
             ) : (
                 <div onClick={() => setIsOpen(!isOpen)}>
@@ -114,7 +116,7 @@ export const CacheTable = ({ cacheData }: { cacheData: CacheInterface[] }) => {
                         <Td>{obj.size}</Td>
                         <Td>{obj.creation_date.split('.')[0]}</Td>
                         <Td>{obj.owner}</Td>
-                        <Td tw="relative z-40">
+                        <Td tw="relative">
                             <JsonArgs cacheArgs={obj.args} />
                         </Td>
                     </Tr>

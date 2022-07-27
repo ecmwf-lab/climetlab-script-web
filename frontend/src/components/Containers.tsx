@@ -32,14 +32,14 @@ export const ContainerHeader = ({
                         Cache
                     </HeaderTitle>
                     {children}
-                    <button onClick={() => setIsOpen(!isOpen)} tw="self-end">
+                    <button onClick={() => setIsOpen(!isOpen)} tw="self-start">
                         <UpArrow tw="text-gray-900 hover:text-blue-700 h-4 w-4 md:(h-6 w-6)" />
                     </button>
                 </div>
             ) : (
                 <div tw="flex flex-row justify-between p-4 md:(flex-row justify-between p-6) lg:(p-8) bg-gray-200">
                     <HeaderTitle tw="">Cache</HeaderTitle>
-                    <button onClick={() => setIsOpen(!isOpen)} tw="self-end">
+                    <button onClick={() => setIsOpen(!isOpen)} tw="self-start">
                         <DownArrow tw="text-gray-900 hover:text-blue-700 h-4 w-4 md:(h-6 w-6)" />
                     </button>
                 </div>
