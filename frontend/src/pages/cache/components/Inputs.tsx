@@ -92,9 +92,7 @@ export const FileSizeInput = ({
                     <FileSizeDropdown
                         state={state}
                         setState={setState}
-                        headerLabel={`${
-                            variant.charAt(0).toUpperCase() + variant.slice(1)
-                        } than file size.`}
+                        headerLabel={`File ${variant} than`}
                         setIsDropdownOpen={setIsDropdownOpen}
                     />
                 </div>
@@ -139,9 +137,7 @@ export const FileDateInput = ({
                 <FileDateDropdown
                     state={state}
                     setState={setState}
-                    headerLabel={`${
-                        variant.charAt(0).toUpperCase() + variant.slice(1)
-                    } than file date.`}
+                    headerLabel={`File ${variant} than`}
                     setIsDropdownOpen={setIsDropdownOpen}
                 />
             )}

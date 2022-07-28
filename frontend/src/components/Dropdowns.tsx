@@ -15,7 +15,7 @@ const DropdownContainer = styled.div(({ usedFor }: { usedFor: string }) => [
     usedFor === 'table' && tw`relative z-20 absolute right-0 w-64`,
 ])
 
-const DropdownHeader = tw.div`flex flex-row justify-between mt-1 mb-4 text-gray-500 md:(mt-2 mb-8) `
+const DropdownHeader = tw.div`flex flex-row justify-between mt-1 mb-4 md:(mt-2 mb-8) `
 const DropdownBody = tw.div`flex flex-row space-x-2 overflow-auto`
 
 const Dropdown = ({
@@ -35,7 +35,7 @@ const Dropdown = ({
     return (
         <DropdownContainer {...{ usedFor }} ref={ref}>
             <DropdownHeader>
-                <h3>{headerLabel}</h3>
+                <h3 tw="text-gray-500">{headerLabel}</h3>
                 <button
                     onClick={() => {
                         setIsDropdownOpen(false)

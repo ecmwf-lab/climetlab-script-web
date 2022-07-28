@@ -6,25 +6,12 @@ import Dropdown from './Dropdowns'
 import { CheckboxInput } from './Inputs'
 import { CacheInterface } from './../interfaces/cache'
 
+import { isObject, sliceForDisplay } from './../utils/utils'
+
 const Th = tw.th`px-2 py-4 text-base md:(text-lg px-4 py-6)`
 const Tr = tw.tr`border-b border-blue-200`
 const Td = tw.td`px-2 py-2 text-base md:(text-lg px-4 py-4)`
 const Subtext = tw.span`font-normal text-gray-500 text-sm md:text-base`
-
-const isObject = (obj: any) => {
-    return Object.prototype.toString.call(obj) === '[object Object]'
-}
-
-const sliceForDisplay = (inputString: string) => {
-    if (inputString) {
-        const displayString =
-            inputString.slice(0, 7) +
-            '...' +
-            inputString.slice(inputString.length - 3, inputString.length)
-
-        return displayString
-    }
-}
 
 const JsonArgs = ({
     cacheArgs,
