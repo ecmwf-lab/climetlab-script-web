@@ -62,7 +62,6 @@ export const FileSizeInput = ({
     variant,
     state,
     setState,
-    dropdownAligment,
 }: {
     variant: 'larger' | 'smaller'
     state: {
@@ -75,7 +74,6 @@ export const FileSizeInput = ({
             inputType: string
         }>
     >
-    dropdownAligment: 'left' | 'right'
 }) => {
     const [isDropdownOpen, setIsDropdownOpen] = useState<boolean>(false)
 
@@ -90,11 +88,13 @@ export const FileSizeInput = ({
                 setIsDropdownOpen={setIsDropdownOpen}
             />
             {isDropdownOpen && (
-                <div tw="mt-1 w-5/6 md:w-full">
+                <div tw="w-5/6 md:(w-full)">
                     <FileSizeDropdown
                         state={state}
                         setState={setState}
-                        dropdownAligment={dropdownAligment}
+                        headerLabel={`${
+                            variant.charAt(0).toUpperCase() + variant.slice(1)
+                        } than file size.`}
                         setIsDropdownOpen={setIsDropdownOpen}
                     />
                 </div>
@@ -139,6 +139,9 @@ export const FileDateInput = ({
                 <FileDateDropdown
                     state={state}
                     setState={setState}
+                    headerLabel={`${
+                        variant.charAt(0).toUpperCase() + variant.slice(1)
+                    } than file date.`}
                     setIsDropdownOpen={setIsDropdownOpen}
                 />
             )}

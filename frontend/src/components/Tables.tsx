@@ -1,8 +1,10 @@
 import tw from 'twin.macro'
 import 'styled-components/macro'
+import { useState } from 'react'
+
+import Dropdown from './Dropdowns'
 import { CheckboxInput } from './Inputs'
 import { CacheInterface } from './../interfaces/cache'
-import { useState } from 'react'
 
 const Th = tw.th`px-2 py-4 text-base md:(text-lg px-4 py-6)`
 const Tr = tw.tr`border-b border-blue-200`
@@ -34,23 +36,31 @@ const JsonArgs = ({
     return (
         <>
             {isOpen ? (
-                <div
-                    onClick={() => setIsOpen(!isOpen)}
-                    tw="relative z-40 absolute top-0 right-0 overflow-x-auto bg-white border p-3"
-                >
-                    {/* pretty print logic for if cacheArgs is an array  */}
-                    {Array.isArray(cacheArgs) && (
-                        <div tw="flex flex-col">
-                            {cacheArgs.map((item) => (
-                                <span key={item}>{item},</span>
-                            ))}
-                        </div>
-                    )}
-                    {/* pretty print logic for if cacheArgs is an object  */}
-                    {isObject(cacheArgs) && (
-                        <div>{<span>{JSON.stringify(cacheArgs)}</span>}</div>
-                    )}
-                </div>
+                <>
+                    <div onClick={() => setIsOpen(!isOpen)}>
+                        {sliceForDisplay(JSON.stringify(cacheArgs))}
+                    </div>
+                    <Dropdown
+                        usedFor="table"
+                        headerLabel="Expanded Argument"
+                        setIsDropdownOpen={setIsOpen}
+                    >
+                        {/* pretty print logic for if cacheArgs is an array  */}
+                        {Array.isArray(cacheArgs) && (
+                            <div tw="flex flex-col">
+                                {cacheArgs.map((item) => (
+                                    <span key={item}>{item},</span>
+                                ))}
+                            </div>
+                        )}
+                        {/* pretty print logic for if cacheArgs is an object  */}
+                        {isObject(cacheArgs) && (
+                            <div>
+                                {<span>{JSON.stringify(cacheArgs)}</span>}
+                            </div>
+                        )}
+                    </Dropdown>
+                </>
             ) : (
                 <div onClick={() => setIsOpen(!isOpen)}>
                     {sliceForDisplay(JSON.stringify(cacheArgs))}

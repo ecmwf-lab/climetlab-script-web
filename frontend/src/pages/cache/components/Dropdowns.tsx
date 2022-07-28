@@ -4,7 +4,7 @@ import 'styled-components/macro'
 import { useEffect, useState } from 'react'
 
 // global components
-import { Dropdown, DropdownNEW } from './../../../components/Dropdowns'
+import Dropdown from './../../../components/Dropdowns'
 import { SelectInput, TextInput } from './../../../components/Inputs'
 
 //===================================================
@@ -17,7 +17,7 @@ interface FileSizeDropdownInterface {
     setState: React.Dispatch<
         React.SetStateAction<{ inputValue: string; inputType: string }>
     >
-    dropdownAligment: 'left' | 'right'
+    headerLabel: string
     setIsDropdownOpen: React.Dispatch<React.SetStateAction<boolean>>
 }
 
@@ -25,7 +25,7 @@ interface FileSizeDropdownInterface {
 export const FileSizeDropdown = ({
     state,
     setState,
-    dropdownAligment,
+    headerLabel,
     setIsDropdownOpen,
 }: FileSizeDropdownInterface) => {
     // Local form state.
@@ -38,9 +38,10 @@ export const FileSizeDropdown = ({
     }, [setState, inputValue, inputType])
 
     return (
-        <DropdownNEW
+        <Dropdown
+            usedFor="input"
+            headerLabel={headerLabel}
             setIsDropdownOpen={setIsDropdownOpen}
-            dropdownAligment={dropdownAligment}
         >
             {/* Input by default are set to w-full. */}
             {/* Therefore, we use external divs to control for width. */}
@@ -66,7 +67,7 @@ export const FileSizeDropdown = ({
                     ]}
                 />
             </div>
-        </DropdownNEW>
+        </Dropdown>
     )
 }
 
@@ -80,6 +81,7 @@ interface FileDateDropdownInterface {
     setState: React.Dispatch<
         React.SetStateAction<{ inputValue: string; inputType: string }>
     >
+    headerLabel: string
     setIsDropdownOpen: React.Dispatch<React.SetStateAction<boolean>>
 }
 
@@ -87,6 +89,7 @@ interface FileDateDropdownInterface {
 export const FileDateDropdown = ({
     state,
     setState,
+    headerLabel,
     setIsDropdownOpen,
 }: FileDateDropdownInterface) => {
     // Local form state.
@@ -99,7 +102,11 @@ export const FileDateDropdown = ({
     }, [setState, inputValue, inputType])
 
     return (
-        <Dropdown setIsDropdownOpen={setIsDropdownOpen}>
+        <Dropdown
+            usedFor="input"
+            headerLabel={headerLabel}
+            setIsDropdownOpen={setIsDropdownOpen}
+        >
             {/* Input by default are set to w-full. */}
             {/* Therefore, we use external divs to control for width. */}
             <div tw="w-3/5">
