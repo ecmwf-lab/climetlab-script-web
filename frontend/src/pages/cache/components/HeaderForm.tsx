@@ -84,6 +84,12 @@ const HeaderForm = ({
             smaller:
                 inputSmallerThanFileSize.inputValue +
                 inputSmallerThanFileSize.inputType,
+            newer:
+                inputNewerThanFileDate.inputValue +
+                inputNewerThanFileDate.inputType,
+            older:
+                inputOlderThanFileDate.inputValue +
+                inputOlderThanFileDate.inputType,
         }
         axios
             .get('/api/cache', { params: queryObj })

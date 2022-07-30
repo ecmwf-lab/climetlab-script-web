@@ -1,5 +1,3 @@
-# import json
-
 import climetlab as cml
 from climetlab.core.caching import (
     cache_directory,
@@ -12,15 +10,17 @@ from flask import Flask, request
 from flask.helpers import send_from_directory
 from waitress import serve
 
-# import subprocess
-
-
 app = Flask(__name__, static_folder="build", static_url_path="/")
 
 
 @app.route("/")
 def index():
-    return send_from_directory(app.static_folder, "index.html")
+    if app.static_folder:
+        return send_from_directory(app.static_folder, "index.html")
+    else:
+        raise ValueError(
+            "app.static_folder does not exist. Please check the file path."
+        )
 
 
 @app.route("/api/cache/capabilities")
@@ -46,14 +46,6 @@ def cache_capabilities():
     }
 
 
-# /api/cache?file-name=""
-# /api/cache?owner=""
-# /api/cache?file-type=""
-# /api/cache?min-date-accessed=""&max-date-accessed=""
-# /api/cache/min-file-size=""&max-file-size=""
-
-
-# f = Matcher({"owner": "owner_name_1", "file-name": "file_name_1"})
 # request.args = {
 #     "larger": "100",
 #     "smaller": "700",
@@ -65,14 +57,22 @@ def cache_capabilities():
 
 @app.route("/api/cache", methods=["GET", "DELETE"])
 def cache():
-    matcher = Matcher(dict(request.args))
-    print(dict(request.args))
-    if request.method == "GET":
-        return {"data": dump_cache_database(matcher=matcher)}
-    if request.method == "DELETE":
-        purge_cache(matcher=matcher)
-        return {"ok": "ok"}  # TODO
-    raise NotImplementedError()
+    is_request_empty = True
+    for val in dict(request.args).values():
+        if val != "":
+            is_request_empty = False
+
+    print(is_request_empty, dict(request.args))
+    if is_request_empty:
+        return {"data": dump_cache_database()}
+    else:
+        matcher = Matcher(dict(request.args))
+        if request.method == "GET":
+            return {"data": dump_cache_database(matcher=matcher)}
+        if request.method == "DELETE":
+            purge_cache(matcher=matcher)
+            return {"ok": "ok"}  # TODO
+        raise NotImplementedError()
 
 
 @app.route("/api/cache/meta", methods=["GET"])
