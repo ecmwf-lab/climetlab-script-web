@@ -4,7 +4,7 @@ import 'styled-components/macro'
 import { useEffect, useState } from 'react'
 
 // global components
-import Dropdown from './../../../components/Dropdowns'
+import Dropdown from './../../../components/Dropdown'
 import { SelectInput, TextInput } from './../../../components/Inputs'
 
 //===================================================

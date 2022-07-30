@@ -17,7 +17,7 @@ import {
 } from './Inputs'
 
 // interfaces
-import { CacheInterface } from '../../../interfaces/cache'
+import { CacheInterface } from './../interfaces/cache'
 
 const HeaderForm = ({
     setCacheData,
