@@ -82,6 +82,8 @@ mv build ../climetlab_script_web/build
 
 Or you can also simply type `make build`. (_See `Makefile` for automation._)
 
+Bump package version in the `climetlab_script_web/version` file.
+
 Finally, run `climetlab_web` from the project's root and navigate to `http://127.0.0.1:8080` in your browser.
 
 # Licence
