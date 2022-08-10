@@ -29,7 +29,16 @@ const Cache = () => {
     useEffect(() => {
         axios
             .get<CacheResponseInterface>('/api/cache')
-            .then((res) => setCacheData(res.data.data))
+            // add a 'isChecked' property to all rows in the cache
+            // response from the server. The 'isChecked' property
+            // is used for selecting the different cache files
+            // in the table.
+            .then((res) =>
+                res.data.data.map((item) => ({ ...item, isChecked: false }))
+            )
+            // the response to cacheData state which is then used by
+            // other components.
+            .then((res) => setCacheData(res))
     }, [])
 
     return (
@@ -38,7 +47,7 @@ const Cache = () => {
                 <HeaderForm setCacheData={setCacheData} />
             </ContainerHeader>
             <ContainerBody>
-                <CacheTable cacheData={cacheData} />
+                <CacheTable cacheData={cacheData} setCacheData={setCacheData} />
             </ContainerBody>
         </Container>
     )

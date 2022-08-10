@@ -76,14 +76,26 @@ const CacheTableHeader = () => {
 }
 
 // cache table body rows
-const CacheTableBody = ({ cacheData }: { cacheData: CacheInterface[] }) => {
+const CacheTableBody = ({
+    cacheData,
+    setCacheData,
+}: {
+    cacheData: CacheInterface[]
+
+    setCacheData: React.Dispatch<React.SetStateAction<CacheInterface[]>>
+}) => {
     return (
         <>
             {cacheData.map((obj) => (
                 <Tr key={obj.path}>
                     {/* check box */}
                     <Th>
-                        <CheckboxInput inputName="checkbox" />
+                        <CheckboxInput
+                            inputName="checkbox"
+                            inputValue={obj.path}
+                            state={cacheData}
+                            setState={setCacheData}
+                        />
                     </Th>
                     {/* file name */}
                     <Td>
@@ -114,11 +126,22 @@ const CacheTableBody = ({ cacheData }: { cacheData: CacheInterface[] }) => {
 }
 
 // cache table uses the global <Table /> component.
-const CacheTable = ({ cacheData }: { cacheData: CacheInterface[] }) => {
+const CacheTable = ({
+    cacheData,
+    setCacheData,
+}: {
+    cacheData: CacheInterface[]
+    setCacheData: React.Dispatch<React.SetStateAction<CacheInterface[]>>
+}) => {
     return (
         <Table
             header={<CacheTableHeader />}
-            body={<CacheTableBody cacheData={cacheData} />}
+            body={
+                <CacheTableBody
+                    cacheData={cacheData}
+                    setCacheData={setCacheData}
+                />
+            }
         />
     )
 }

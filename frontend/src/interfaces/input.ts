@@ -1,6 +1,14 @@
+// import { CacheInterface } from './../pages/cache/interfaces/cache'
+
 export interface InputInterface {
     inputName: string
     inputLabel?: string
+}
+
+export interface CheckboxInputInterface extends InputInterface {
+    // inputValue: string
+    // state: CacheInterface[]
+    // setState?: React.Dispatch<React.SetStateAction<CacheInterface[]>>
 }
 
 export interface TextInputInterface extends InputInterface {

@@ -4,9 +4,9 @@ import { useEffect, useState, useRef } from 'react'
 
 // interfaces
 import {
-    InputInterface,
     TextInputInterface,
     SelectInputInterface,
+    CheckboxInputInterface,
     MultiRangeSliderInputInterface,
 } from './../interfaces/input'
 
@@ -20,7 +20,7 @@ const InputStyle = tw.label`flex flex-col w-full text-base space-y-2 md:(w-full 
 //======================================
 
 //===== check box ======
-export const CheckboxInput = ({ inputName }: InputInterface) => {
+export const CheckboxInput = ({ inputName }: CheckboxInputInterface) => {
     return (
         <input
             tw="block box-border border-gray-400 rounded-lg md:(h-4 w-4) lg:(h-6 w-6)"
