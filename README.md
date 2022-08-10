@@ -66,7 +66,7 @@ flask run
 
 - Open your browser and navigate to `http://127.0.0.1:3000`
 - Changes in the frontend will automatically reflect here.
-- Changes in the backend will require a restart of flask server.
+- Changes in the backend will require a restart of flask server unless you do: `export FLASK_ENV=development`.
 - Use Makefile commands for improved development experience (`make help`).
 - A pre-commit hook performs linting, formatting, and testing for both ReactJs and Python code.
 
