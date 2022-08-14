@@ -1,5 +1,6 @@
 import 'twin.macro'
 import 'styled-components/macro'
+import { Link } from 'react-router-dom'
 
 // import logo
 import logo from './../assets/logo.png'
@@ -16,8 +17,15 @@ const Navbar = () => {
                     />
                 </li>
                 <div tw="flex flex-row text-base space-x-4 sm:(text-lg space-x-6) md:(text-xl space-x-8)">
-                    <li>Cache</li>
-                    <li>Settings</li>
+                    <li>
+                        <Link to="/">Cache</Link>
+                    </li>
+                    <li>
+                        <Link to="stats">Stats</Link>
+                    </li>
+                    <li>
+                        <Link to="settings/">Settings</Link>
+                    </li>
                 </div>
             </ul>
         </nav>
