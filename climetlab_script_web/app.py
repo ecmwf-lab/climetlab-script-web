@@ -58,15 +58,28 @@ def cache_capabilities():
 @app.route("/api/cache", methods=["GET", "DELETE"])
 def cache():
     is_request_empty = True
-    for val in dict(request.args).values():
+    request_dict = dict(request.args)
+
+    # if atleast a single value is not empty in
+    # this dictionary, then is_request_empty=False
+    for val in request_dict.values():
         if val != "":
             is_request_empty = False
 
-    print(is_request_empty, dict(request.args))
+    # now that the dictionary has atleast 1 value,
+    # we remove the remaining empty key-value pairs,
+    # because that's how the CliMetLab API works.
+    keys_to_delete = [key for key, val in request_dict.items() if val == ""]
+    for key in keys_to_delete:
+        del request_dict[key]
+
+    # if request from the frontend is empy,
+    # then return all the cache entries. Else,
+    # return those requested.
     if is_request_empty:
         return {"data": dump_cache_database()}
     else:
-        matcher = Matcher(dict(request.args))
+        matcher = Matcher(request_dict)
         if request.method == "GET":
             return {"data": dump_cache_database(matcher=matcher)}
         if request.method == "DELETE":
