@@ -4,9 +4,9 @@ A web application to manage the cache content and configuration settings of the 
 
 ## Installation
 
-### Using pip
-
 Installation in a virtual environment is advised.
+
+### Using pip
 
 ```
 pip install climetlab-script-web
