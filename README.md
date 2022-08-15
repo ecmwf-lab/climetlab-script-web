@@ -4,15 +4,23 @@ A web application to manage the cache content and configuration settings of the 
 
 ## Installation
 
+### Using pip
+
 Installation in a virtual environment is advised.
 
-### Clone Repository
+```
+pip install climetlab-script-web
+```
+
+### From source
+
+#### Clone Repository
 
 ```
 git clone https://github.com/ecmwf-lab/climetlab-script-web
 ```
 
-### Install Backend
+#### Install Backend
 
 This installs `CliMetLab` and related backend packages. Core packages are listed in `setup.py` while development packages are listed in `requirements.txt`.
 
@@ -22,7 +30,7 @@ pip install -e .
 pip install -r requirements.txt
 ```
 
-### Install Frontend
+#### Install Frontend
 
 Check out the Github actions file for details.
 
@@ -34,7 +42,7 @@ npm run build
 mv build ../climetlab_script_web/build
 ```
 
-## Usage
+#### Run
 
 Run the following command from project's root and navigate to `http://127.0.0.1:8080` in your browser.
 
