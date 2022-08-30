@@ -19,9 +19,11 @@ export const Container = ({ children }: { children: React.ReactNode }) => {
 }
 
 export const ContainerHeader = ({
+    label,
     children,
 }: {
-    children: React.ReactNode
+    label: string
+    children?: React.ReactNode
 }) => {
     const [isOpen, setIsOpen] = useState<boolean>(true)
     return (
@@ -29,7 +31,7 @@ export const ContainerHeader = ({
             {isOpen ? (
                 <div tw="flex flex-col space-y-4 p-4 md:(flex-row justify-between items-center space-y-0 space-x-12 p-6) lg:(p-8) bg-gray-200">
                     <HeaderTitle tw="md:(py-16 border-r border-gray-900)">
-                        Cache
+                        {label}
                     </HeaderTitle>
                     {children}
                     <button
@@ -41,7 +43,7 @@ export const ContainerHeader = ({
                 </div>
             ) : (
                 <div tw="flex flex-row justify-between p-4 md:(flex-row justify-between p-6) lg:(p-8) bg-gray-200">
-                    <HeaderTitle tw="">Cache</HeaderTitle>
+                    <HeaderTitle>{label}</HeaderTitle>
                     <button
                         onClick={() => setIsOpen(!isOpen)}
                         tw="self-center md:self-start"

@@ -43,7 +43,7 @@ const Cache = () => {
 
     return (
         <Container>
-            <ContainerHeader>
+            <ContainerHeader label="Cache">
                 <HeaderForm setCacheData={setCacheData} />
             </ContainerHeader>
             <ContainerBody>

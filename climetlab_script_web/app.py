@@ -107,9 +107,9 @@ def settings():
     if request.method == "GET":
         res = cml.settings.dump()
         res = list(res)
-        for k in res:
-            print(k)
-        return {"settings": res}
+        res = [{r[0]: str(r[1])} for r in res]
+        print(res)
+        return {"data": res}
 
 
 def run_server():
