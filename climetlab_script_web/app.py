@@ -96,8 +96,8 @@ def cache_meta():
     if not matcher.undefined:
         message = matcher.message
     return {
-        "count": count,
-        "size": size,
+        "count": str(count),
+        "size": str(size),
         "message": message,
     }
 
