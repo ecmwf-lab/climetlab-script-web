@@ -108,10 +108,11 @@ const HeaderForm = ({
                         state={inputSearch}
                         setState={setInputSearch}
                     />
-                    <FileTypeInput
-                        state={inputFileType}
-                        setState={setInputFileType}
-                    />
+                    {/* Uncomment after API is added in CliMetLand */}
+                    {/* <FileTypeInput */}
+                    {/*     state={inputFileType} */}
+                    {/*     setState={setInputFileType} */}
+                    {/* /> */}
                 </InputColumn>
                 <InputColumn>
                     <div tw="relative z-10 flex flex-row w-full justify-between md:(space-y-0 space-x-4)">
