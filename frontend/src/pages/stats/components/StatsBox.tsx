@@ -3,7 +3,7 @@ import 'styled-components/macro'
 
 const StatsBox = ({ label, value }: { label: string; value: string }) => {
     return (
-        <div tw="flex flex-col items-center justify-center shadow-lg">
+        <div tw="flex flex-col items-center justify-center shadow">
             <div tw="w-full text-center bg-blue-700 rounded-t-lg text-gray-100 p-2 md:(text-xl p-4)">
                 {label}
             </div>

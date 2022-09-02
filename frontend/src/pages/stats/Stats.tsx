@@ -33,7 +33,7 @@ const Stats = () => {
         <Container>
             <ContainerHeader label="Stats" />
             <ContainerBody>
-                <div tw="grid grid-cols-1 gap-8 md:(grid-cols-3 gap-12)">
+                <div tw="grid grid-cols-1 gap-8 md:(grid-cols-3 gap-12) lg:(gap-24)">
                     <StatsBox label="Number of Files" value={statsData.count} />
                     <StatsBox label="Total File Size" value={statsData.size} />
                     <StatsBox

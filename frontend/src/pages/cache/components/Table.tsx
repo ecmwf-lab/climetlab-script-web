@@ -20,7 +20,7 @@ const JsonArgs = ({
     return (
         <>
             {isOpen ? (
-                <>
+                <div>
                     <div onClick={() => setIsOpen(!isOpen)}>
                         {sliceForDisplay(JSON.stringify(cacheArgs))}
                     </div>
@@ -44,7 +44,7 @@ const JsonArgs = ({
                             </div>
                         )}
                     </Dropdown>
-                </>
+                </div>
             ) : (
                 <div onClick={() => setIsOpen(!isOpen)}>
                     {sliceForDisplay(JSON.stringify(cacheArgs))}
@@ -59,6 +59,7 @@ const CacheTableHeader = () => {
     return (
         <Tr>
             <Th>
+                {/* !! add inputValue when implementing the checkbox functionality*/}
                 <CheckboxInput inputName="checkbox" />
             </Th>
             <Th>Name</Th>
