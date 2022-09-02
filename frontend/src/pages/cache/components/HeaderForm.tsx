@@ -150,7 +150,7 @@ const HeaderForm = ({
                 </InputColumn>
             </InputRow>
             <div tw="self-center md:(self-end text-end pl-16)">
-                <SubmitButton>apply</SubmitButton>
+                <SubmitButton>Apply</SubmitButton>
             </div>
         </form>
     )

@@ -2,8 +2,12 @@ import 'twin.macro'
 import 'styled-components/macro'
 import { useState } from 'react'
 
+// global
+import { DeleteButton } from './../../../components/Buttons'
 import Dropdown from './../../../components/Dropdown'
 import { CheckboxInput } from './../../../components/Inputs'
+
+// local
 import { CacheInterface } from './../interfaces/cache'
 
 import { isObject, sliceForDisplay } from './../../../utils/utils'
@@ -63,31 +67,34 @@ const CacheTableHeader = ({
     setCacheData: React.Dispatch<React.SetStateAction<CacheInterface[]>>
 }) => {
     return (
-        <Tr>
-            <Th>
-                {/* !! add inputValue when implementing the checkbox functionality*/}
-                <CheckboxInput
-                    inputName="selectAllCheckbox"
-                    // check the 'selectAll' checkbox only if all checkboxes are selected.
-                    isChecked={
-                        cacheData.filter((row) => row?.isChecked !== true)
-                            .length < 1
-                    }
-                    state={cacheData}
-                    setState={setCacheData}
-                />
-            </Th>
-            <Th>Name</Th>
-            <Th>Filetype</Th>
-            <Th>
-                Size <Subtext>(bytes)</Subtext>
-            </Th>
-            <Th>
-                Date <Subtext>(y-m-d h:m:s)</Subtext>
-            </Th>
-            <Th>Owner</Th>
-            <Th>Argument</Th>
-        </Tr>
+        <>
+            <Tr>
+                <Th>
+                    {/* !! add inputValue when implementing the checkbox functionality*/}
+                    <CheckboxInput
+                        inputName="selectAllCheckbox"
+                        // check the 'selectAll' checkbox only if all checkboxes are selected.
+                        isChecked={
+                            false ||
+                            cacheData.filter((row) => row?.isChecked !== true)
+                                .length < 1
+                        }
+                        state={cacheData}
+                        setState={setCacheData}
+                    />
+                </Th>
+                <Th>Name</Th>
+                <Th>Filetype</Th>
+                <Th>
+                    Size <Subtext>(bytes)</Subtext>
+                </Th>
+                <Th>
+                    Date <Subtext>(y-m-d h:m:s)</Subtext>
+                </Th>
+                <Th>Owner</Th>
+                <Th>Argument</Th>
+            </Tr>
+        </>
     )
 }
 
@@ -107,7 +114,6 @@ const CacheTableBody = ({
                     <Th>
                         <CheckboxInput
                             inputName={obj.path}
-                            inputValue={obj.path}
                             isChecked={obj.isChecked || false}
                             state={cacheData}
                             setState={setCacheData}
@@ -150,20 +156,27 @@ const CacheTable = ({
     setCacheData: React.Dispatch<React.SetStateAction<CacheInterface[]>>
 }) => {
     return (
-        <Table
-            header={
-                <CacheTableHeader
-                    cacheData={cacheData}
-                    setCacheData={setCacheData}
-                />
-            }
-            body={
-                <CacheTableBody
-                    cacheData={cacheData}
-                    setCacheData={setCacheData}
-                />
-            }
-        />
+        <div>
+            {cacheData.filter((row) => row?.isChecked === true).length > 0 ? (
+                <DeleteButton> Delete </DeleteButton>
+            ) : (
+                <DeleteButton tw="invisible">Delete</DeleteButton>
+            )}
+            <Table
+                header={
+                    <CacheTableHeader
+                        cacheData={cacheData}
+                        setCacheData={setCacheData}
+                    />
+                }
+                body={
+                    <CacheTableBody
+                        cacheData={cacheData}
+                        setCacheData={setCacheData}
+                    />
+                }
+            />
+        </div>
     )
 }
 
