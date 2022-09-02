@@ -1,5 +1,7 @@
 import 'twin.macro'
 import 'styled-components/macro'
+
+import axios from 'axios'
 import { useState } from 'react'
 
 // global
@@ -155,8 +157,29 @@ const CacheTable = ({
     cacheData: CacheInterface[]
     setCacheData: React.Dispatch<React.SetStateAction<CacheInterface[]>>
 }) => {
+    const deleteCache = (event: React.SyntheticEvent) => {
+        event.preventDefault()
+        const queryArr = {
+            filesToDelete: cacheData
+                .filter((row) => row.isChecked === true)
+                .map((row) => row.path),
+        }
+        console.log(queryArr)
+        axios
+            .delete(`/api/cache/delete/`, {
+                params: { data: queryArr.filesToDelete },
+            })
+            .then((res) => console.log(res))
+        /* .then((res) => setCacheData(res.data.data)) */
+        /* axios */
+        /*     .delete(`/api/cache/delete/${queryArr.filesToDelete}`, {}) */
+        /*     .then((res) => console.log(res)) */
+        /* .then((res) => setCacheData(res.data.data)) */
+    }
     return (
-        <div>
+        <form onSubmit={deleteCache}>
+            {/* invisible button that still occupies space on DOM to prevent the UI */}
+            {/* jump when the actuall button appears. */}
             {cacheData.filter((row) => row?.isChecked === true).length > 0 ? (
                 <DeleteButton> Delete </DeleteButton>
             ) : (
@@ -176,7 +199,7 @@ const CacheTable = ({
                     />
                 }
             />
-        </div>
+        </form>
     )
 }
 

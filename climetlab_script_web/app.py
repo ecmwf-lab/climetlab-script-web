@@ -88,6 +88,14 @@ def cache():
         raise NotImplementedError()
 
 
+@app.route("/api/cache/delete/<cache_path>", methods=["DELETE"])
+def cache_delete(cache_path):
+    for i in cache_path:
+        print("lmao")
+        print(i)
+    return {"data": "lmao"}
+
+
 @app.route("/api/cache/meta", methods=["GET"])
 def cache_meta():
     matcher = Matcher(dict(request.args))
