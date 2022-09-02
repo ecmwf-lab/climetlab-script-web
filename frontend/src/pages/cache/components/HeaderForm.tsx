@@ -11,7 +11,7 @@ import { SubmitButton } from './../../../components/Buttons'
 import { InputColumn, InputRow } from './Containers'
 import {
     SearchInput,
-    FileTypeInput,
+    /* FileTypeInput, */
     FileSizeInput,
     FileDateInput,
 } from './Inputs'
@@ -32,7 +32,7 @@ const HeaderForm = ({
     const [inputSearch, setInputSearch] = useState<string>('')
 
     // ======= file type =======
-    const [inputFileType, setInputFileType] = useState<string>('')
+    /* const [inputFileType, setInputFileType] = useState<string>('') */
 
     // ======= file size - larger =======
     const [inputLargerThanFileSize, setInputLargerThanFileSize] = useState<{
