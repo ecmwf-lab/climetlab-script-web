@@ -2,15 +2,13 @@
 
 ## Installation
 
-### From source
-
-#### Clone Repository
+### Clone Repository
 
 ```
 git clone https://github.com/ecmwf-lab/climetlab-script-web
 ```
 
-#### Install Backend
+### Install Backend
 
 This installs `CliMetLab` and related backend packages. Core packages are listed in `setup.py` while development packages are listed in `requirements.txt`.
 
@@ -20,7 +18,7 @@ pip install -e .
 pip install -r requirements.txt
 ```
 
-#### Install Frontend
+### Install Frontend
 
 Check out the Github actions file for details.
 
@@ -32,7 +30,7 @@ npm run build
 mv build ../climetlab_script_web/build
 ```
 
-#### Run
+### Run
 
 Run the following command from project's root and navigate to `http://127.0.0.1:8080` in your browser.
 
@@ -92,22 +90,23 @@ The frontend starts from `frontend/src/App.tsx`.
 
 - `assets/`: contains images and icons used throughout the app.
 - `components/`: contains global components used throughout the app.
-  - `Buttons` (reusable buttons)
-  - `Containers` (for a uniform page layout)
-  - `Dropdown` (general dropdown component modified by local components)
-  - `Input` (general input components which are modified by local components. These inputs handle the setting of state and onChange events.)
-  - `Navbar` (navbar component used throughout the app)
-  - `Table` (general table component with a few base styles)
-  - `Text` (for page/section title text)
+  - `Buttons.tsx`: reusable buttons such as _submit_ or _delete_.
+  - `Containers.tsx`: contains components to ensure a uniform page layout throughout the app.
+  - `Dropdown.tsx`: general dropdown component modified by local components.
+  - `Input.tsx`: general input components which are modified by local components. These inputs handle the setting of state and onChange events.
+  - `Navbar.tsx`: navbar component used throughout the app.
+  - `Table.tsx`: general table component with a few base styles.
+  - `Text.tsx`: for page/section title text.
 - `hooks/`: contains global hooks used throughout the app.
+  - `useClickOutside`: hook to close the dropdown on mouse click outside the dropdown.
 - `interfaces/`: contains interfaces for global components.
 - `utils/`: contains general utility functions.
-- `pages/`: contains the three main packages. Each folder contains local components and interfaces. These local components can inherit parts from the global components.
+- `pages/`: contains the three main packages. Each folder contains local _components/_ and _interfaces/_. These local components can inherit parts from the global components.
   - `cache/`
   - `settings/`
   - `stats/`
 
-#### How to
+#### Frontend how to
 
 ##### Add a new page
 
