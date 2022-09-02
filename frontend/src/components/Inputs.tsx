@@ -20,12 +20,34 @@ const InputStyle = tw.label`flex flex-col w-full text-base space-y-2 md:(w-full 
 //======================================
 
 //===== check box ======
-export const CheckboxInput = ({ inputName }: CheckboxInputInterface) => {
+export const CheckboxInput = ({
+    inputName,
+    isChecked,
+    state,
+    setState,
+}: CheckboxInputInterface) => {
+    const handleCheckbox = (event) => {
+        const { name, checked } = event.target
+        if (name === 'selectAllCheckbox') {
+            let tempState = state.map((row) => {
+                return { ...row, isChecked: checked }
+            })
+            setState(tempState)
+        } else {
+            let tempState = state.map((row) =>
+                row.path === name ? { ...row, isChecked: checked } : row
+            )
+            setState(tempState)
+        }
+    }
     return (
         <input
             tw="block box-border border-gray-400 rounded-lg md:(h-4 w-4) lg:(h-6 w-6)"
             type="checkbox"
             name={inputName}
+            /* value={inputValue} */
+            checked={isChecked}
+            onChange={handleCheckbox}
         />
     )
 }

@@ -55,12 +55,27 @@ const JsonArgs = ({
 }
 
 // cache table header columns
-const CacheTableHeader = () => {
+const CacheTableHeader = ({
+    cacheData,
+    setCacheData,
+}: {
+    cacheData: CacheInterface[]
+    setCacheData: React.Dispatch<React.SetStateAction<CacheInterface[]>>
+}) => {
     return (
         <Tr>
             <Th>
                 {/* !! add inputValue when implementing the checkbox functionality*/}
-                <CheckboxInput inputName="checkbox" />
+                <CheckboxInput
+                    inputName="selectAllCheckbox"
+                    // check the 'selectAll' checkbox only if all checkboxes are selected.
+                    isChecked={
+                        cacheData.filter((row) => row?.isChecked !== true)
+                            .length < 1
+                    }
+                    state={cacheData}
+                    setState={setCacheData}
+                />
             </Th>
             <Th>Name</Th>
             <Th>Filetype</Th>
@@ -82,7 +97,6 @@ const CacheTableBody = ({
     setCacheData,
 }: {
     cacheData: CacheInterface[]
-
     setCacheData: React.Dispatch<React.SetStateAction<CacheInterface[]>>
 }) => {
     return (
@@ -92,8 +106,9 @@ const CacheTableBody = ({
                     {/* check box */}
                     <Th>
                         <CheckboxInput
-                            inputName="checkbox"
+                            inputName={obj.path}
                             inputValue={obj.path}
+                            isChecked={obj.isChecked || false}
                             state={cacheData}
                             setState={setCacheData}
                         />
@@ -136,7 +151,12 @@ const CacheTable = ({
 }) => {
     return (
         <Table
-            header={<CacheTableHeader />}
+            header={
+                <CacheTableHeader
+                    cacheData={cacheData}
+                    setCacheData={setCacheData}
+                />
+            }
             body={
                 <CacheTableBody
                     cacheData={cacheData}

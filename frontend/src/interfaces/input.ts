@@ -6,7 +6,7 @@ export interface InputInterface {
 }
 
 export interface CheckboxInputInterface extends InputInterface {
-    inputValue: string
+    isChecked?: boolean
     state: CacheInterface[]
     setState?: React.Dispatch<React.SetStateAction<CacheInterface[]>>
 }

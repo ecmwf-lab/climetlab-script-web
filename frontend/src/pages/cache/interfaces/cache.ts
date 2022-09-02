@@ -28,7 +28,7 @@ export interface CacheInterface {
     replaced: null | string
     size: number
     type: string
-    // 'checked' is an optional custom field used for
+    // 'isChecked' is an optional custom field used for
     // the selecting the cache files.
     // It is optional because the server response would
     // not have this field. This field is added as a
