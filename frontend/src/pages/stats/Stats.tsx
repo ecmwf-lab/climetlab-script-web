@@ -14,6 +14,7 @@ import {
 //local
 import { StatsInterface } from './interfaces/stats'
 import StatsBox from './components/StatsBox'
+import { convertBytesToX } from '../../utils/utils'
 
 const Stats = () => {
     // stats response state
@@ -35,14 +36,13 @@ const Stats = () => {
             <ContainerBody>
                 <div tw="grid grid-cols-1 gap-8 md:(grid-cols-3 gap-12) lg:(gap-24)">
                     <StatsBox label="Number of Files" value={statsData.count} />
-                    <StatsBox label="Total File Size" value={statsData.size} />
+                    <StatsBox
+                        label="Total File Size"
+                        value={convertBytesToX(statsData.size)}
+                    />
                     <StatsBox
                         label="Messages"
-                        value={
-                            statsData.message
-                                ? statsData.message
-                                : '-'
-                        }
+                        value={statsData.message ? statsData.message : '-'}
                     />
                 </div>
             </ContainerBody>

@@ -12,3 +12,13 @@ export const sliceForDisplay = (inputString: string) => {
         return displayString
     }
 }
+
+export const convertBytesToX = (inputSize: number) => {
+    if (inputSize < 1024) {
+        return inputSize + ' bytes'
+    } else if (inputSize >= 1024 && inputSize < 1048576) {
+        return inputSize / 1024 + 'Kb'
+    } else if (inputSize >= 1048576) {
+        return inputSize / 1048576 + 'Mb'
+    }
+}

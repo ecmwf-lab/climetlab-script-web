@@ -5,13 +5,13 @@ import axios from 'axios'
 import { useState } from 'react'
 
 // global
+import { convertBytesToX } from './../../../utils/utils'
 import { DeleteButton } from './../../../components/Buttons'
 import Dropdown from './../../../components/Dropdown'
 import { CheckboxInput } from './../../../components/Inputs'
 
 // local
 import { CacheInterface } from './../interfaces/cache'
-
 import { isObject, sliceForDisplay } from './../../../utils/utils'
 import { Td, Th, Tr, Subtext, Table } from './../../../components/Table'
 
@@ -87,9 +87,7 @@ const CacheTableHeader = ({
                 </Th>
                 <Th>Name</Th>
                 <Th>Filetype</Th>
-                <Th>
-                    Size <Subtext>(bytes)</Subtext>
-                </Th>
+                <Th>Size</Th>
                 <Th>
                     Date <Subtext>(y-m-d h:m:s)</Subtext>
                 </Th>
@@ -137,7 +135,8 @@ const CacheTableBody = ({
                                 [obj.path.split('/').length - 1].split('.')[1]
                         }
                     </Td>
-                    <Td>{obj.size}</Td>
+                    {/* bytes to megabytes */}
+                    <Td>{convertBytesToX(obj.size)}</Td>
                     <Td>{obj.creation_date.split('.')[0]}</Td>
                     <Td>{obj.owner}</Td>
                     <Td tw="relative">
@@ -164,17 +163,12 @@ const CacheTable = ({
                 .filter((row) => row.isChecked === true)
                 .map((row) => row.path),
         }
-        console.log(queryArr.filesToDelete)
         axios
             .delete(`/api/cache/delete`, {
                 data: queryArr.filesToDelete,
             })
+            /* do something as response */
             .then((res) => console.log(res))
-        /* .then((res) => setCacheData(res.data.data)) */
-        /* axios */
-        /*     .delete(`/api/cache/delete/${queryArr.filesToDelete}`, {}) */
-        /*     .then((res) => console.log(res)) */
-        /* .then((res) => setCacheData(res.data.data)) */
     }
     return (
         <form onSubmit={deleteCache}>
