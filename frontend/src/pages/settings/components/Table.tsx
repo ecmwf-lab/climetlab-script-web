@@ -41,19 +41,20 @@ const SettingsTable = ({
     setSettingsData,
 }: {
     settingsData: SettingsInterface[]
-
     setSettingsData: React.Dispatch<React.SetStateAction<SettingsInterface[]>>
 }) => {
     return (
-        <Table
-            header={<SettingsTableHeader />}
-            body={
-                <SettingsTableBody
-                    settingsData={settingsData}
-                    setSettingsData={setSettingsData}
-                />
-            }
-        />
+        <form>
+            <Table
+                header={<SettingsTableHeader />}
+                body={
+                    <SettingsTableBody
+                        settingsData={settingsData}
+                        setSettingsData={setSettingsData}
+                    />
+                }
+            />
+        </form>
     )
 }
 
