@@ -164,10 +164,10 @@ const CacheTable = ({
                 .filter((row) => row.isChecked === true)
                 .map((row) => row.path),
         }
-        console.log(queryArr)
+        console.log(queryArr.filesToDelete)
         axios
-            .delete(`/api/cache/delete/`, {
-                params: { data: queryArr.filesToDelete },
+            .delete(`/api/cache/delete`, {
+                data: queryArr.filesToDelete,
             })
             .then((res) => console.log(res))
         /* .then((res) => setCacheData(res.data.data)) */

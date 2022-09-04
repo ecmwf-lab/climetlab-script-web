@@ -10,6 +10,8 @@ from flask import Flask, request
 from flask.helpers import send_from_directory
 from waitress import serve
 
+from ast import literal_eval
+
 app = Flask(__name__, static_folder="build", static_url_path="/")
 
 
@@ -88,12 +90,16 @@ def cache():
         raise NotImplementedError()
 
 
-@app.route("/api/cache/delete/<cache_path>", methods=["DELETE"])
-def cache_delete(cache_path):
-    for i in cache_path:
-        print("lmao")
-        print(i)
-    return {"data": "lmao"}
+@app.route("/api/cache/delete", methods=["DELETE"])
+def cache_delete():
+    # decode request string
+    files_to_delete = request.data.decode("UTF-8")
+    # convert a string representation of list to list datatype.
+    files_to_delete = literal_eval(files_to_delete)
+    # delete files via Climetlab.
+    for f in files_to_delete:
+        print(f"Deleting file - {f}\n")
+    return {"data": "Files deleted."}
 
 
 @app.route("/api/cache/meta", methods=["GET"])
