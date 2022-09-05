@@ -1,3 +1,5 @@
+from ast import literal_eval
+
 import climetlab as cml
 from climetlab.core.caching import (
     cache_directory,
@@ -9,8 +11,6 @@ from climetlab.scripts.cache import CacheCmd, Matcher
 from flask import Flask, request
 from flask.helpers import send_from_directory
 from waitress import serve
-
-from ast import literal_eval
 
 app = Flask(__name__, static_folder="build", static_url_path="/")
 
