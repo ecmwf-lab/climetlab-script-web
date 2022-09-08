@@ -1,3 +1,4 @@
+import { TextInput } from '../../../components/Inputs'
 import { Td, Th, Tr, Subtext, Table } from './../../../components/Table'
 
 import { SettingsInterface } from './../interfaces/settings'
@@ -19,16 +20,27 @@ const SettingsTableHeader = () => {
 const SettingsTableBody = ({
     settingsData,
     setSettingsData,
+    isEditMode,
 }: {
     settingsData: SettingsInterface[]
     setSettingsData: React.Dispatch<React.SetStateAction<SettingsInterface[]>>
+    isEditMode: boolean
 }) => {
     return (
         <>
             {settingsData.map((row) => (
                 <Tr key={Object.keys(row)[0]}>
                     <Td>{Object.keys(row)}</Td>
-                    <Td>{Object.values(row)}</Td>
+                    {isEditMode ? (
+                        <Td>
+                            <TextInput
+                                inputName={Object.values(row)}
+                                state={Object.values(row)}
+                            />
+                        </Td>
+                    ) : (
+                        <Td>{Object.values(row)}</Td>
+                    )}
                 </Tr>
             ))}
         </>
@@ -39,9 +51,11 @@ const SettingsTableBody = ({
 const SettingsTable = ({
     settingsData,
     setSettingsData,
+    isEditMode,
 }: {
     settingsData: SettingsInterface[]
     setSettingsData: React.Dispatch<React.SetStateAction<SettingsInterface[]>>
+    isEditMode: boolean
 }) => {
     return (
         <form>
@@ -51,6 +65,7 @@ const SettingsTable = ({
                     <SettingsTableBody
                         settingsData={settingsData}
                         setSettingsData={setSettingsData}
+                        isEditMode={isEditMode}
                     />
                 }
             />

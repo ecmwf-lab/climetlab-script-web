@@ -17,11 +17,13 @@ import {
     SettingsInterface,
     SettingsResponseInterface,
 } from './interfaces/settings'
+import { EditButton, SubmitButton } from '../../components/Buttons'
 
 // main component
 const Settings = () => {
     // settings response state
     const [settingsData, setSettingsData] = useState<SettingsInterface[]>([])
+    const [isEditMode, setIsEditMode] = useState<boolean>(false)
 
     // display all cache on first page load
     useEffect(() => {
@@ -31,11 +33,22 @@ const Settings = () => {
     }, [])
     return (
         <Container>
-            <ContainerHeader label="Settings" />
+            <ContainerHeader label="Settings">
+                {isEditMode ? (
+                    <SubmitButton onClick={() => setIsEditMode(false)}>
+                        Save
+                    </SubmitButton>
+                ) : (
+                    <EditButton onClick={() => setIsEditMode(true)}>
+                        Edit Settings
+                    </EditButton>
+                )}
+            </ContainerHeader>
             <ContainerBody>
                 <SettingsTable
                     settingsData={settingsData}
                     setSettingsData={setSettingsData}
+                    isEditMode={isEditMode}
                 />
             </ContainerBody>
         </Container>
