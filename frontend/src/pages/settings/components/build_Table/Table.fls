@@ -1,6 +1,0 @@
-PWD /home/akshaj/projects/all/climetlab-script-web
-INPUT /usr/local/texlive/2022/texmf.cnf
-INPUT /usr/local/texlive/2022/texmf-dist/web2c/texmf.cnf
-INPUT /usr/local/texlive/2022/texmf-var/web2c/pdftex/pdflatex.fmt
-INPUT /home/akshaj/projects/all/climetlab-script-web/frontend/src/pages/settings/components/Table.tsx
-OUTPUT frontend/src/pages/settings/components/build_Table/Table.log
