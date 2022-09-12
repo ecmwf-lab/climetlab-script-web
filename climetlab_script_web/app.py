@@ -122,7 +122,6 @@ def settings():
         res = cml.settings.dump()
         res = list(res)
         res = [{r[0]: str(r[1])} for r in res]
-        print(res)
         return {"data": res}
 
 
