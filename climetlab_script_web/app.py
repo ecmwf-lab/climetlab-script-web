@@ -3,6 +3,7 @@ from ast import literal_eval
 import climetlab as cml
 from climetlab.core.caching import (
     cache_directory,
+    decache_file,
     dump_cache_database,
     purge_cache,
     summary_dump_cache_database,
@@ -98,7 +99,8 @@ def cache_delete():
     files_to_delete = literal_eval(files_to_delete)
     # delete files via Climetlab.
     for f in files_to_delete:
-        print(f"Deleting file - {f}\n")
+        print(f"Deleting file : {f}\n")
+        decache_file(f)
     return {"data": "Files deleted."}
 
 
