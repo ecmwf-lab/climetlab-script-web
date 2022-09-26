@@ -12,7 +12,7 @@ import { Close } from './../assets/icons/Close'
 const DropdownContainer = styled.div(({ usedFor }: { usedFor: string }) => [
     tw`absolute flex flex-col w-full bg-white shadow-lg rounded-lg pt-2 pb-4 px-4`,
     usedFor === 'input' && tw`right-0 md:right-auto mt-1 md:mt-2`,
-    usedFor === 'table' && tw`relative z-20 absolute right-0 w-96`,
+    usedFor === 'table' && tw`z-20 absolute right-0 w-96`,
 ])
 
 const DropdownHeader = tw.div`flex flex-row justify-between mt-1 mb-4 md:(mt-2 mb-8) `
